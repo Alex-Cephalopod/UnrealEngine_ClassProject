@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-//include the header file for the BaseRifleAnimInstance
-//#include "Art/BaseRifleAnimInstance.h"
 #include "BaseCharacter.generated.h"
 
 UCLASS()
@@ -20,10 +18,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	//Create a TSubClassOf of the BaseRifleAnimInstance
-	/*UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		TSubclassOf<class UBaseRifleAnimInstance> RifleAnimClass;*/
 
 public:	
 	// Called every frame

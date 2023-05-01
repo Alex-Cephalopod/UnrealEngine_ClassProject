@@ -9,7 +9,6 @@ void UBaseRifleAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	//get the pawn
 	APawn* Pawn = TryGetPawnOwner();
-
 	if (Pawn)
 	{
 		//get the speed of the pawn

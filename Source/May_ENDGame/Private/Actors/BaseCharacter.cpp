@@ -2,8 +2,6 @@
 
 
 #include "Actors/BaseCharacter.h"
-//include the header file for the BaseRifleAnimInstance
-//#include "Art/BaseRifleAnimInstance.h"
 
 // Sets default values
 ABaseCharacter::ABaseCharacter()
@@ -21,21 +19,6 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	//if (RifleAnimClass)
-	//{
-	//	
-	//	UBaseRifleAnimInstance* RifleAnim = NewObject<UBaseRifleAnimInstance>(this, RifleAnimClass);
-	//	if (RifleAnim)
-	//	{
-	//		//GetMesh()->SetAnimInstance(RifleAnim); 
-	//	}
-	//}
-	//else
-	//{
-	//	//Log that the RifleAnimClass is not set
-	//	UE_LOG(LogTemp, Warning, TEXT("RifleAnimClass is not set"));
-	//}
 }
 
 // Called every frame
