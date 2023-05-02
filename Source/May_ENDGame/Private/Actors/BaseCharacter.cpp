@@ -2,6 +2,11 @@
 
 
 #include "Actors/BaseCharacter.h"
+#include "Actors/BaseWeapon.h"
+#include "Components/ChildActorComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/SceneComponent.h" 
+
 
 // Sets default values
 ABaseCharacter::ABaseCharacter()
@@ -9,9 +14,14 @@ ABaseCharacter::ABaseCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	//Move mesh down by 90 degrees, so it's at the correct rotation.
-	GetMesh()->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
 	//rotate the caracter -90 degrees so it faces the correct direction
-	GetMesh()->SetRelativeLocation(FVector(0.0f, 0.0f, -90.0f));
+	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -90.0f));
+
+	//set the weapon as a child actor component
+	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
+	WeaponChild->SetupAttachment(this->GetMesh(), "WeaponTransform");
+	WeaponClass = ABaseWeapon::StaticClass();
 
 }
 
@@ -19,6 +29,8 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	WeaponChild->SetChildActorClass(ABaseWeapon::StaticClass()); 
 }
 
 // Called every frame

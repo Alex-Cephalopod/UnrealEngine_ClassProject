@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BaseBullet.generated.h"
+//Declare a dynamic multicast delegate with one parameter of type AActor*
+
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEventHappens, AActor*, OtherActor);
 
 UCLASS()
 class MAY_ENDGAME_API ABaseBullet : public AActor
@@ -24,14 +27,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		class UProjectileMovementComponent* ProjectileMovement;
 	
-
+	//time variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float TimeToDestroy;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	UFUNCTION() 
 		void HandleCollision(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
 			const FHitResult& SweepResult);

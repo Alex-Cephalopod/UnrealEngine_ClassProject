@@ -5,6 +5,9 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+//if there are any includes for time, add them here. if not, comment "none found"
+#include "TimerManager.h"
+
 
 // Sets default values
 ABaseBullet::ABaseBullet()
@@ -13,6 +16,8 @@ ABaseBullet::ABaseBullet()
 	PrimaryActorTick.bCanEverTick = true;
 	//set start with tick enabled to be false
 	PrimaryActorTick.bStartWithTickEnabled = false;
+
+	TimeToDestroy = 3.f;
 
 	//set a sphere collision component as the root component
 	SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollision"));
@@ -46,6 +51,15 @@ void ABaseBullet::BeginPlay()
 {
 	Super::BeginPlay();
 	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABaseBullet::HandleCollision);
+
+	//set the actor to be destroyed after a certain amount of time
+	/*SetLifeSpan(TimeToDestroy);*/
+
+	//create a set timer by event that will destroy the actor after a certain amount of time
+	FTimerHandle TimerHandle;
+	//GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ABaseBullet::DestroyByTimer, TimeToDestroy, false);
+	//do the same thing as above, but with a function called K2_DestroyActor
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ABaseBullet::K2_DestroyActor, TimeToDestroy, false); 
 }
 
 void ABaseBullet::HandleCollision(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
