@@ -6,6 +6,8 @@
 #include "Components/ChildActorComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SceneComponent.h" 
+#include "Art/BaseRifleAnimInstance.h"
+#include "Components/BaseHealthComponent.h"
 
 
 // Sets default values
@@ -21,7 +23,9 @@ ABaseCharacter::ABaseCharacter()
 	//set the weapon as a child actor component
 	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
 	WeaponChild->SetupAttachment(this->GetMesh(), "WeaponTransform");
-	WeaponClass = ABaseWeapon::StaticClass();
+
+	//set the health component as a child actor component
+	HealthComponent = CreateDefaultSubobject<UBaseHealthComponent>(TEXT("HealthComponent"));
 
 }
 
@@ -30,7 +34,23 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	WeaponChild->SetChildActorClass(ABaseWeapon::StaticClass()); 
+	WeaponClass = ABaseWeapon::StaticClass();
+	WeaponChild->SetChildActorClass(WeaponClass);
+
+	//get the child actor of WeaponChild and cast it to a base weapon
+	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());
+
+	//cast the mesh's GetAnimInstance to AnimInstance
+	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
+
+	if (AnimInstance == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Animation"));
+	}
+	else
+	{
+		
+	}
 }
 
 // Called every frame
@@ -45,5 +65,11 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABaseCharacter::Attacks()
+{
+	Weapon->Attacks();
+	AnimInstance->PlayAttack();
 }
 

@@ -31,6 +31,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TimeToDestroy;
 
+	//float damage variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float Damage;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

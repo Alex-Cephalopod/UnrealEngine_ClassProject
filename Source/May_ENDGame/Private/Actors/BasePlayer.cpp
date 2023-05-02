@@ -10,13 +10,14 @@
 
 ABasePlayer::ABasePlayer()
 {
-	//give spring arm component a default value
+	
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
-	//raise up component by 60 units
-	SpringArmComp->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
+	
+	SpringArmComp->SetRelativeLocation(FVector(0.0f, 80.0f, 90.0f));
+	SpringArmComp->TargetArmLength = 210.0f;
 	SpringArmComp->bUsePawnControlRotation = true;
-	//give camera component a default value
+	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
 
@@ -33,8 +34,11 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasePlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasePlayer::MoveRight);
 
-	//bind jump action
+	//button input actions
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ABasePlayer::Jump);
+	//add an input for stop jumping
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABaseCharacter::Attacks);
 
 }
 

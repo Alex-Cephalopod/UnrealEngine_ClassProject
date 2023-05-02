@@ -19,10 +19,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		class UChildActorComponent* WeaponChild;
 
-	//create a BaseWeapon class variable
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-		TSubclassOf<class ABaseWeapon> WeaponClass;*/
-	
+	//create a BaseHealthComponent variable
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		class UBaseHealthComponent* HealthComponent;
+
+	//create a base weapon variable
+	UPROPERTY()
+		class ABaseWeapon* Weapon;
+
+	//Create a variable for the BaseRigleAnimInstance
+	UPROPERTY()
+		class UBaseRifleAnimInstance* AnimInstance; 
 
 protected:
 	// Called when the game starts or when spawned
@@ -36,5 +43,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	//create a function to attack called Attacks
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		void Attacks();
 
 };

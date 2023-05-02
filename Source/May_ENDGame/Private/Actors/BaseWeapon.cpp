@@ -2,6 +2,7 @@
 
 
 #include "Actors/BaseWeapon.h"
+#include "Actors/BaseBullet.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -25,15 +26,30 @@ ABaseWeapon::ABaseWeapon()
 void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+	BulletClass = ABaseBullet::StaticClass();
+	//cast the parent actor to a pawn and store it in the pawn owner variable
+	PawnOwner = Cast<APawn>(GetParentActor());
+
+	if (PawnOwner != nullptr)
+	{
+
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Pawn Owner"));
+	}
 	
 }
 
 void ABaseWeapon::Attacks()
 {
-	
+	//use the spawn actor function to spawn a projectile of bullet class, the spawn transform will be the GetActorTransform, and the instigator will be the pawn owner
+	//GetWorld()->SpawnActor<ABullet>(BulletClass, GetActorTransform(), GetInstigator()); 
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Instigator = PawnOwner;
+	SpawnParams.Owner = PawnOwner->GetController();
 
-
-
+	GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams);
 }
 
 

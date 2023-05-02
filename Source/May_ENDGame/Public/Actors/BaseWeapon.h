@@ -18,9 +18,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		class USkeletalMeshComponent* WeaponMesh;
 
+	//set up a pawn variable to store the pawn owner
+	UPROPERTY()
+		class APawn* PawnOwner;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	// Create a UClass variable to store the bullet class ABaseBullet
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class ABaseBullet> BulletClass;
 
 public:	
 	

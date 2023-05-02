@@ -9,8 +9,13 @@ UBaseHealthComponent::UBaseHealthComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
+	
+	//set start with tick enabled to false
+	PrimaryComponentTick.bStartWithTickEnabled = false;
 
-	// ...
+	MaxHealth = 5.f;
+
+
 }
 
 
@@ -19,16 +24,25 @@ void UBaseHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	InitHealth();
+
+	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UBaseHealthComponent::DamageHappened);
+
 }
 
-
-// Called every frame
-void UBaseHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UBaseHealthComponent::InitHealth()
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	CurrentHealth = MaxHealth;
+}
 
-	// ...
+void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+	CurrentHealth -= Damage;
+
+	//clamp current health to 0 and MaxHealth
+	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);
+
+	//print current health to screen
+	UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
 }
 
