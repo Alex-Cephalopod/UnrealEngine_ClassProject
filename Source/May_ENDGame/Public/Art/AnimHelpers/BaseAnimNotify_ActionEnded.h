@@ -13,5 +13,10 @@ UCLASS()
 class MAY_ENDGAME_API UBaseAnimNotify_ActionEnded : public UAnimNotify_PlaySound
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+		class UBaseRifleAnimInstance* AnimInstance;
 };

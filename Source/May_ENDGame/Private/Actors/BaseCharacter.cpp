@@ -46,6 +46,8 @@ void ABaseCharacter::BeginPlay()
 	HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
 
 	Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack);
+
+	AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded);
 }
 
 // Called every frame
@@ -75,5 +77,10 @@ void ABaseCharacter::Damaged()
 void ABaseCharacter::PlayAttack()
 {
 	AnimInstance->PlayAttack();
+}
+
+void ABaseCharacter::AnimEnded()
+{
+	Weapon->AnimationEnded();
 }
 

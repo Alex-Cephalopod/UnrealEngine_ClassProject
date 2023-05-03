@@ -55,4 +55,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Anim")
 		void PlayAttack(); 
 
+	UFUNCTION(BlueprintCallable, Category = "Anim")
+		void AnimEnded();
+
 };

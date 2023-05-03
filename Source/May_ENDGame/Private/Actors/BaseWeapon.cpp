@@ -61,7 +61,7 @@ void ABaseWeapon::Attacks()
 	
 }
 
-bool ABaseWeapon::CanShoot()
+bool ABaseWeapon::CanShoot() const
 {
 	return !Animating;
 }

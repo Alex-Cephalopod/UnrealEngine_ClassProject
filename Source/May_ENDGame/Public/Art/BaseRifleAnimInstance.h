@@ -6,6 +6,7 @@
 #include "Animation/AnimInstance.h"
 #include "BaseRifleAnimInstance.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE (FRifleDelegate);
 /**
  * 
  */
@@ -23,6 +24,10 @@ public:
 	//create a function called PlayDamaged
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void PlayDamaged();
+
+	//create a delegate called OnActionEnded
+	UPROPERTY(BlueprintAssignable, Category = "Function")
+		FRifleDelegate OnActionEnded;
 	
 protected:
 	void NativeUpdateAnimation(float DeltaSeconds) override;

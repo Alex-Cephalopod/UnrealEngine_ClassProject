@@ -47,7 +47,7 @@ public:
 
 	//create a function that returns a bool called CanShoot
 	UFUNCTION(BlueprintCallable, Category = "Function")
-		bool CanShoot();
+		bool CanShoot() const;
 
 	//create a function called AnimationEnded
 	UFUNCTION(BlueprintCallable, Category = "Function")

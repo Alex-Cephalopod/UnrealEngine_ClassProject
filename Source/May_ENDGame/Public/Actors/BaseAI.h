@@ -13,5 +13,14 @@ UCLASS()
 class MAY_ENDGAME_API ABaseAI : public ABaseCharacter
 {
 	GENERATED_BODY()
+
+public:
+	//create constructor
+	ABaseAI();
 	
+protected:
+
+public:
+	//create a function called Tick
+	virtual void Tick(float DeltaTime) override;
 };
