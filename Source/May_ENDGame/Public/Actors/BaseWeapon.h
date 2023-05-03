@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "BaseWeapon.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE (FWeaponDelegate);
+
 UCLASS()
 class MAY_ENDGAME_API ABaseWeapon : public AActor
 {
@@ -22,6 +24,14 @@ public:
 	UPROPERTY()
 		class APawn* PawnOwner;
 
+	//make a bool variable called Animating
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		bool Animating;
+
+	//create a delegate called OnAttack
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+		FWeaponDelegate OnAttack;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -34,5 +44,13 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void Attacks();
+
+	//create a function that returns a bool called CanShoot
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		bool CanShoot();
+
+	//create a function called AnimationEnded
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void AnimationEnded();
 
 };

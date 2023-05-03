@@ -42,7 +42,18 @@ void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, co
 	//clamp current health to 0 and MaxHealth
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);
 
-	//print current health to screen
-	UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
+	if (CurrentHealth > 0)
+	{
+		//Call OnDamaged delegate
+		OnDamaged.Broadcast();
+
+		//print current health to screen
+		UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
+	}
+	else {
+		//unbind from owner's OnTakeAnyDamage event
+		GetOwner()->OnTakeAnyDamage.RemoveDynamic(this, &UBaseHealthComponent::DamageHappened);
+		UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
+	}
 }
 

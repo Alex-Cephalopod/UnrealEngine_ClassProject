@@ -48,4 +48,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void Attacks();
 
+	//create a function to attack called Damaged
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		void Damaged();
+
+	UFUNCTION(BlueprintCallable, Category = "Anim")
+		void PlayAttack(); 
+
 };

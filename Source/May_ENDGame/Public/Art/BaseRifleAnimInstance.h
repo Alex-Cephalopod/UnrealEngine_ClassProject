@@ -19,6 +19,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void PlayAttack();
+
+	//create a function called PlayDamaged
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void PlayDamaged();
 	
 protected:
 	void NativeUpdateAnimation(float DeltaSeconds) override;
@@ -34,9 +38,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		class UAnimSequence* AttackAnim;
 
+	//create a variable of Anim Sequence called DamagedAnim
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		class UAnimSequence* DamagedAnim;
+
 	//create a bool variable called DebugAttack
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool DebugAttack;
+
+	//create a bool variable called DebugDamaged
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		bool DebugDamaged;
 
 	//Create a blueprint native event called PersonaUpdate
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Function")

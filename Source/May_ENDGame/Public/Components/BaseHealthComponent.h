@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "BaseHealthComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE (FHealthComponentDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MAY_ENDGAME_API UBaseHealthComponent : public UActorComponent
@@ -19,6 +20,10 @@ public:
 	//create float called MaxHealth
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float MaxHealth;
+
+	//Create a delegate called OnDamaged
+	UPROPERTY(BlueprintAssignable, Category = "Health")
+		FHealthComponentDelegate OnDamaged;
 
 private:
 	//create float called CurrentHealth

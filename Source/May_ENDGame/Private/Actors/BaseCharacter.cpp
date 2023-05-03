@@ -43,14 +43,9 @@ void ABaseCharacter::BeginPlay()
 	//cast the mesh's GetAnimInstance to AnimInstance
 	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
 
-	if (AnimInstance == nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No Animation"));
-	}
-	else
-	{
-		
-	}
+	HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
+
+	Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack);
 }
 
 // Called every frame
@@ -70,6 +65,15 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ABaseCharacter::Attacks()
 {
 	Weapon->Attacks();
+}
+
+void ABaseCharacter::Damaged() 
+{
+	AnimInstance->PlayDamaged();
+}
+
+void ABaseCharacter::PlayAttack()
+{
 	AnimInstance->PlayAttack();
 }
 

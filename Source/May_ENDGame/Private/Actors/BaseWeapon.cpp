@@ -10,6 +10,7 @@ ABaseWeapon::ABaseWeapon()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = false;
+	Animating = false;
 
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 	SetRootComponent(WeaponMesh);
@@ -45,11 +46,29 @@ void ABaseWeapon::Attacks()
 {
 	//use the spawn actor function to spawn a projectile of bullet class, the spawn transform will be the GetActorTransform, and the instigator will be the pawn owner
 	//GetWorld()->SpawnActor<ABullet>(BulletClass, GetActorTransform(), GetInstigator()); 
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Instigator = PawnOwner;
-	SpawnParams.Owner = PawnOwner->GetController();
+	if (CanShoot())
+	{
+		FActorSpawnParameters SpawnParams; 
+		SpawnParams.Instigator = PawnOwner; 
+		SpawnParams.Owner = PawnOwner->GetController(); 
 
-	GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams);
+		GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams); 
+
+		Animating = true;
+
+		OnAttack.Broadcast();
+	}
+	
+}
+
+bool ABaseWeapon::CanShoot()
+{
+	return !Animating;
+}
+
+void ABaseWeapon::AnimationEnded()
+{
+	Animating = false;
 }
 
 
