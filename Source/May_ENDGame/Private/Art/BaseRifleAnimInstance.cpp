@@ -35,8 +35,6 @@ void UBaseRifleAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		PersonaUpdate();
 	}
-
-
 }
 
 void UBaseRifleAnimInstance::PersonaUpdate_Implementation()
@@ -55,7 +53,7 @@ void UBaseRifleAnimInstance::PersonaUpdate_Implementation()
 
 void UBaseRifleAnimInstance::PlayAttack()
 {
-	PlaySlotAnimationAsDynamicMontage(AttackAnim, "Action"); 
+	PlaySlotAnimationAsDynamicMontage(AttackAnim, "TestAction"); 
 }
 
 void UBaseRifleAnimInstance::PlayDamaged()

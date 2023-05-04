@@ -5,9 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "BaseBullet.generated.h"
-//Declare a dynamic multicast delegate with one parameter of type AActor*
-
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEventHappens, AActor*, OtherActor);
 
 UCLASS()
 class MAY_ENDGAME_API ABaseBullet : public AActor
@@ -15,7 +12,7 @@ class MAY_ENDGAME_API ABaseBullet : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+
 	ABaseBullet();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -27,13 +24,16 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		class UProjectileMovementComponent* ProjectileMovement;
 	
-	//time variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TimeToDestroy;
 
-	//float damage variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float Damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FVector MeshSize;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FVector CollisionSize;
 
 protected:
 	// Called when the game starts or when spawned

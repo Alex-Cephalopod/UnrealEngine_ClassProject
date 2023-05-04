@@ -12,22 +12,17 @@ class MAY_ENDGAME_API ABaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	ABaseCharacter();
 
-	//create a child actor component for the weapon
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		class UChildActorComponent* WeaponChild;
 
-	//create a BaseHealthComponent variable
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		class UBaseHealthComponent* HealthComponent;
 
-	//create a base weapon variable
 	UPROPERTY()
 		class ABaseWeapon* Weapon;
 
-	//Create a variable for the BaseRigleAnimInstance
 	UPROPERTY()
 		class UBaseRifleAnimInstance* AnimInstance; 
 
@@ -44,11 +39,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	//create a function to attack called Attacks
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void Attacks();
 
-	//create a function to attack called Damaged
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		void Damaged();
 

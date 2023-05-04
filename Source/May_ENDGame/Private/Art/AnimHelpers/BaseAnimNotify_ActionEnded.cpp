@@ -7,14 +7,14 @@
 void UBaseAnimNotify_ActionEnded::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {
 	Super::Notify(MeshComp, Animation);
-	//get the anim instance to call its delegate
-	AnimInstance = Cast<UBaseRifleAnimInstance>(MeshComp->GetAnimInstance());
-	if (AnimInstance)
+	AnimInstance = Cast<UBaseRifleAnimInstance>(MeshComp->GetAnimInstance()); 
+	if (AnimInstance) 
 	{
-		AnimInstance->OnActionEnded.Broadcast();
+		AnimInstance->OnActionEnded.Broadcast(); 
 	}
-	else
+	else 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AnimInstance is null"));
-	}
+		UE_LOG(LogTemp, Warning, TEXT("AnimInstance is null")); 
+	} 
+	//AnimInstance->OnActionEnded.Broadcast();
 }

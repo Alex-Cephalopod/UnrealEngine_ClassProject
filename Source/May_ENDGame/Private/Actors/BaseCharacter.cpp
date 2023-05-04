@@ -15,16 +15,13 @@ ABaseCharacter::ABaseCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	//Move mesh down by 90 degrees, so it's at the correct rotation.
+
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
-	//rotate the caracter -90 degrees so it faces the correct direction
 	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -90.0f));
 
-	//set the weapon as a child actor component
 	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
 	WeaponChild->SetupAttachment(this->GetMesh(), "WeaponTransform");
 
-	//set the health component as a child actor component
 	HealthComponent = CreateDefaultSubobject<UBaseHealthComponent>(TEXT("HealthComponent"));
 
 }
@@ -37,10 +34,8 @@ void ABaseCharacter::BeginPlay()
 	WeaponClass = ABaseWeapon::StaticClass();
 	WeaponChild->SetChildActorClass(WeaponClass);
 
-	//get the child actor of WeaponChild and cast it to a base weapon
 	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());
 
-	//cast the mesh's GetAnimInstance to AnimInstance
 	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
 
 	HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
@@ -54,14 +49,12 @@ void ABaseCharacter::BeginPlay()
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ABaseCharacter::Attacks()

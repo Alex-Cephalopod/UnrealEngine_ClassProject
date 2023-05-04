@@ -2,10 +2,9 @@
 
 
 #include "Actors/BasePlayer.h"
-//include spring arm component
 #include "Camera/CameraComponent.h"
-//include camera component
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 ABasePlayer::ABasePlayer()
@@ -27,40 +26,35 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	//bind axis to look up and look right
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnTo", this, &APawn::AddControllerYawInput);
-
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasePlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasePlayer::MoveRight);
 
-	//button input actions
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ABasePlayer::Jump);
-	//add an input for stop jumping
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABaseCharacter::Attacks);
+	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABasePlayer::PlayerShoot);
 
 }
 
 void ABasePlayer::MoveForward(float Value)
 {
-	//get the forward vector of the player
 	FVector Forward = GetActorForwardVector(); 
-	//move the player forward
 	AddMovementInput(Forward, Value); 
 }
 
 void ABasePlayer::MoveRight(float Value)
 {
-	//get the right vector of the player
 	FVector Right = GetActorRightVector();
-	//move the player right
 	AddMovementInput(Right, Value);
 }
 
-void ABasePlayer::Jump()
+void ABasePlayer::PlayerShoot()
 {
-	//call the jump function
-	Super::Jump();
+	Attacks();
+}
 
+void ABasePlayer::Jump()
+{	
+	Super::Jump();
 }
