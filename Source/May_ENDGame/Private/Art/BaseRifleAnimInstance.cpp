@@ -8,6 +8,8 @@ UBaseRifleAnimInstance::UBaseRifleAnimInstance()
 	DebugAttack = false;
 	DebugDamaged = false;
 
+	DeathIndex = -1;
+
 	static ConstructorHelpers::FObjectFinder<UAnimSequence> AttackAnimAsset(TEXT("AnimSequence'/Game/END_Starter/Mannequin/A_Fire_Ironsights.A_Fire_Ironsights'"));
 	if (AttackAnimAsset.Succeeded())
 	{
@@ -19,6 +21,20 @@ UBaseRifleAnimInstance::UBaseRifleAnimInstance()
 	{
 		DamagedAnim = DamagedAnimAsset.Object; 
 	} 
+
+	//Death animations added to list
+
+	static ConstructorHelpers::FObjectFinder<UAnimSequence> DeathAnimAsset1(TEXT("AnimSequence'/Game/END_Starter/Mannequin/A_Death1_Ironsights.A_Death1_Ironsights'"));
+	if (DeathAnimAsset1.Succeeded())
+	{
+		DeathAnims.Add(DeathAnimAsset1.Object);
+	}
+	//add another death animation to the list
+	static ConstructorHelpers::FObjectFinder<UAnimSequence> DeathAnimAsset2(TEXT("AnimSequence'/Game/END_Starter/Mannequin/A_Death2_Ironsights.A_Death2_Ironsights'"));
+	if (DeathAnimAsset2.Succeeded())
+	{
+		DeathAnims.Add(DeathAnimAsset2.Object);
+	}
 }
 
 void UBaseRifleAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
@@ -49,6 +65,11 @@ void UBaseRifleAnimInstance::PersonaUpdate_Implementation()
 		PlayDamaged();
 		DebugDamaged = false;
 	}
+	else if (DebugDeath)
+	{
+		PlayDeath();
+		DebugDeath = false;
+	}
 }
 
 void UBaseRifleAnimInstance::PlayAttack()
@@ -59,4 +80,11 @@ void UBaseRifleAnimInstance::PlayAttack()
 void UBaseRifleAnimInstance::PlayDamaged()
 {
 	PlaySlotAnimationAsDynamicMontage(DamagedAnim, "Hurt");
+}
+
+void UBaseRifleAnimInstance::PlayDeath()
+{
+	//play a random death animation from the list
+	DeathIndex = FMath::RandRange(0, DeathAnims.Num() - 1);
+	CurrentDeathAnim = DeathAnims[DeathIndex];
 }

@@ -8,6 +8,8 @@
 #include "Components/SceneComponent.h" 
 #include "Art/BaseRifleAnimInstance.h"
 #include "Components/BaseHealthComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Components/CapsuleComponent.h"
 
 
 // Sets default values
@@ -43,6 +45,8 @@ void ABaseCharacter::BeginPlay()
 	Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack);
 
 	AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded);
+
+	HealthComponent->OnDeath.AddDynamic(this, &ABaseCharacter::HandleDeath);
 }
 
 // Called every frame
@@ -72,8 +76,26 @@ void ABaseCharacter::PlayAttack()
 	AnimInstance->PlayAttack();
 }
 
+void ABaseCharacter::PlayDeath()
+{
+	AnimInstance->PlayDeath();
+}
+
 void ABaseCharacter::AnimEnded()
 {
 	Weapon->AnimationEnded();
+}
+
+void ABaseCharacter::OwnerDied()
+{
+	Weapon->OwnerDied();
+}
+
+void ABaseCharacter::HandleDeath()
+{
+	GetCharacterMovement()->DisableMovement();
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	PlayDeath();
+	OwnerDied();
 }
 

@@ -22,6 +22,9 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 		FHealthComponentDelegate OnDamaged;
 
+	UPROPERTY(BlueprintAssignable, Category = "Health")
+		FHealthComponentDelegate OnDeath;
+
 private:
 
 	UPROPERTY()

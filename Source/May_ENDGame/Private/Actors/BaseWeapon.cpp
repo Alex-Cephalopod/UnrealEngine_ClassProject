@@ -44,13 +44,20 @@ void ABaseWeapon::Attacks()
 
 bool ABaseWeapon::CanShoot() const
 {
-	return !Animating;
+	return !Animating && !Dead;
 }
 
 void ABaseWeapon::AnimationEnded()
 {
 	Animating = false;
 }
+
+void ABaseWeapon::OwnerDied()
+{
+	Dead = true;
+}
+
+
 
 
 

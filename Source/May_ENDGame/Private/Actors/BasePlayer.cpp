@@ -22,6 +22,13 @@ ABasePlayer::ABasePlayer()
 
 }
 
+void ABasePlayer::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerController = Cast<APlayerController>(GetController());
+}
+
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -58,3 +65,10 @@ void ABasePlayer::Jump()
 {	
 	Super::Jump();
 }
+
+void ABasePlayer::HandleDeath()
+{
+	Super::HandleDeath();
+	DisableInput(PlayerController);
+}
+

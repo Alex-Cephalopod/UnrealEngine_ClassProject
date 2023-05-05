@@ -39,6 +39,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+#pragma region CustomEvents
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void Attacks();
 
@@ -49,6 +50,16 @@ public:
 		void PlayAttack(); 
 
 	UFUNCTION(BlueprintCallable, Category = "Anim")
+		void PlayDeath();
+
+	UFUNCTION(BlueprintCallable, Category = "Anim")
 		void AnimEnded();
 
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		void OwnerDied();
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		virtual void HandleDeath();
+
+#pragma endregion
 };

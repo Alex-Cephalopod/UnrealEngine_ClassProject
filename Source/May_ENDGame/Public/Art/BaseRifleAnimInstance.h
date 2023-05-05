@@ -24,6 +24,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void PlayDamaged();
 
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void PlayDeath();
+
 	UPROPERTY(BlueprintAssignable, Category = "Function")
 		FRifleDelegate OnActionEnded;
 	
@@ -32,8 +35,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		float Speed;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		float Direction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		int DeathIndex;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		class UAnimSequence* AttackAnim;
@@ -42,10 +49,19 @@ protected:
 		class UAnimSequence* DamagedAnim;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		class UAnimSequence* CurrentDeathAnim;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		TArray<class UAnimSequence*> DeathAnims;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool DebugAttack;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool DebugDamaged;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		bool DebugDeath;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Function")
 		void PersonaUpdate();

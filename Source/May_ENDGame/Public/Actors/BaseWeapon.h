@@ -26,6 +26,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool Animating;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		bool Dead;
+
 	UPROPERTY(BlueprintAssignable, Category = "Weapon")
 		FWeaponDelegate OnAttack;
 
@@ -46,5 +49,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void AnimationEnded();
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void OwnerDied();
 
 };

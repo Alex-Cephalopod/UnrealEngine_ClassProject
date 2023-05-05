@@ -23,8 +23,13 @@ public:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void PlayerShoot();
-
 	void Jump();
+	
+	void HandleDeath() override;
+
+	//get a begin play function to get the player controller
+	virtual void BeginPlay() override;
+
 
 protected:
 	
@@ -33,4 +38,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 		class UCameraComponent* CameraComp;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		class APlayerController* PlayerController;
 };
