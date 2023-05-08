@@ -6,7 +6,7 @@
 // Sets default values for this component's properties
 UBaseHealthComponent::UBaseHealthComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 	PrimaryComponentTick.bStartWithTickEnabled = false;
 	MaxHealth = 5.f;
 }
@@ -30,11 +30,8 @@ void UBaseHealthComponent::InitHealth()
 
 void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	CurrentHealth -= Damage;
 
-	CurrentHealth = FMath::Clamp(CurrentHealth, 0.f, MaxHealth);
-
-	if (CurrentHealth > 0)
+	if (FMath::Clamp(CurrentHealth -= Damage, 0.f, MaxHealth) > 0) 
 	{
 		if (Damage > 0)
 		{

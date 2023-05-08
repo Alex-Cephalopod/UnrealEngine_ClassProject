@@ -16,5 +16,4 @@ void UBaseAnimNotify_ActionEnded::Notify(USkeletalMeshComponent* MeshComp, UAnim
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AnimInstance is null")); 
 	} 
-	//AnimInstance->OnActionEnded.Broadcast();
 }

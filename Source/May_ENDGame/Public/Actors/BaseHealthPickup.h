@@ -29,6 +29,7 @@ protected:
 public:
 
 	virtual void HandlePickup(AActor* OtherActor, const FHitResult& SweepResult) override;
-	/*virtual void PostPickup() override;*/
+
+	virtual bool CanPickUp(AActor* OtherActor, bool yes) const override;
 
 };

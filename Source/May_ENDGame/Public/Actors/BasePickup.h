@@ -18,6 +18,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 		class UBoxComponent* CollisionBox;
 
+	UFUNCTION(BlueprintCallable, Category = "Pickup")
+		virtual bool CanPickUp(AActor* OtherActor, bool yes = true) const;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

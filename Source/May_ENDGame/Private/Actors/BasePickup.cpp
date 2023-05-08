@@ -23,15 +23,21 @@ ABasePickup::ABasePickup()
 void ABasePickup::BeginPlay()
 {
 	Super::BeginPlay();
-
 	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ABasePickup::OnOverlapBegin);
-	
+}
+
+bool ABasePickup::CanPickUp(AActor* OtherActor, bool yes) const
+{
+	return yes;
 }
 
 void ABasePickup::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	HandlePickup(OtherActor, SweepResult);
-	PostPickup();
+	if (CanPickUp(OtherActor) == true)
+	{
+		HandlePickup(OtherActor, SweepResult);
+		PostPickup();
+	}
 }
 
 void ABasePickup::HandlePickup(AActor* OtherActor, const FHitResult& SweepResult)

@@ -15,13 +15,13 @@ public:
 
 	ABaseBullet();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class USphereComponent* SphereCollision;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UStaticMeshComponent* SphereMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UProjectileMovementComponent* ProjectileMovement;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -32,6 +32,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FVector MeshSize;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FVector CollisionSize;
 

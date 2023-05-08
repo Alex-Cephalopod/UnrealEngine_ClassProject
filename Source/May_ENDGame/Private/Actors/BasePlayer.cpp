@@ -29,6 +29,11 @@ void ABasePlayer::BeginPlay()
 	PlayerController = Cast<APlayerController>(GetController());
 }
 
+bool ABasePlayer::CanPickupHealth(bool yes) const
+{
+	return yes = true;
+}
+
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -62,7 +67,7 @@ void ABasePlayer::PlayerShoot()
 }
 
 void ABasePlayer::Jump()
-{	
+{
 	Super::Jump();
 }
 

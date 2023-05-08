@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MAY_ENDGAME_API ABasePlayer : public ABaseCharacter
+class MAY_ENDGAME_API ABasePlayer : public ABaseCharacter, public IIBasePickup
 {
 	GENERATED_BODY()
 	
@@ -29,6 +29,9 @@ public:
 
 	//get a begin play function to get the player controller
 	virtual void BeginPlay() override;
+
+	//implement the interface function
+	bool CanPickupHealth(bool yes = false) const override;
 
 
 protected:

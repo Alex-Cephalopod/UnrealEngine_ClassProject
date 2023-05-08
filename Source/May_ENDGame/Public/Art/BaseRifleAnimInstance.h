@@ -63,6 +63,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool DebugDeath;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		FName ActionSlot = "Action";
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		FName HurtSlot = "Hurt";
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Function")
 		void PersonaUpdate();
 

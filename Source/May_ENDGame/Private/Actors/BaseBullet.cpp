@@ -25,7 +25,7 @@ ABaseBullet::ABaseBullet()
 	SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollision"));
 	SphereCollision->SetCollisionProfileName("OverlapAllDynamic");
 	SphereCollision->SetGenerateOverlapEvents(true);
-	SphereCollision->SetWorldScale3D(FVector(0.2f, 0.2f, 0.2f));
+	SphereCollision->SetWorldScale3D(CollisionSize);
 #pragma endregion
 
 #pragma region SphereMesh_And_Material

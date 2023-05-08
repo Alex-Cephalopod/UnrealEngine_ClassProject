@@ -13,9 +13,6 @@ ABaseWeapon::ABaseWeapon()
 
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 	SetRootComponent(WeaponMesh);
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> WeaponMeshAsset(TEXT("SkeletalMesh'/Game/END_Starter/Guns/Rifle/SK_Rifle.SK_Rifle'"));
-	WeaponMesh->SetSkeletalMesh(WeaponMeshAsset.Object);
-
 }
 
 // Called when the game starts or when spawned

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/IBasePickup.h"
 #include "BaseCharacter.generated.h"
 
 UCLASS()
@@ -30,7 +31,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	TSubclassOf<class ABaseWeapon> WeaponClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class ABaseWeapon> WeaponClass;
 
 public:	
 	// Called every frame

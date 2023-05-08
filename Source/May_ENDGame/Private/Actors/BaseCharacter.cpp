@@ -33,7 +33,6 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	WeaponClass = ABaseWeapon::StaticClass();
 	WeaponChild->SetChildActorClass(WeaponClass);
 
 	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());

@@ -24,3 +24,9 @@ void ABaseHealthPickup::HandlePickup(AActor* OtherActor, const FHitResult& Sweep
 {
 	UGameplayStatics::ApplyDamage(OtherActor, HealthValue, nullptr, this, nullptr);
 }
+
+bool ABaseHealthPickup::CanPickUp(AActor* OtherActor, bool yes) const
+{
+	//OtherActor->CanPick
+	return yes = false;
+}
