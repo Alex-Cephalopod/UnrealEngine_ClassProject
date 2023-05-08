@@ -8,7 +8,7 @@
 #include "BaseCharacter.generated.h"
 
 UCLASS()
-class MAY_ENDGAME_API ABaseCharacter : public ACharacter
+class MAY_ENDGAME_API ABaseCharacter : public ACharacter, public IIBasePickup
 {
 	GENERATED_BODY()
 
@@ -62,6 +62,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		virtual void HandleDeath();
+
+	bool CanPickupHealth() const override;
+	bool ShouldPickupHealth() const override;
 
 #pragma endregion
 };

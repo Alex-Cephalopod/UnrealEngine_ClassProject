@@ -30,6 +30,7 @@ public:
 
 	virtual void HandlePickup(AActor* OtherActor, const FHitResult& SweepResult) override;
 
-	virtual bool CanPickUp(AActor* OtherActor, bool yes) const override;
+	bool CanPickUp(AActor* OtherActor) const override;
 
+	bool ShouldPickUp(AActor* OtherActor) const override;
 };

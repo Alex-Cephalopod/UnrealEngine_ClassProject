@@ -42,4 +42,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		void DamageHappened(AActor* DamagedActor, float Damage, const class UDamageType* DamageType,
 			class AController* InstigatedBy, AActor* DamageCauser);
+
+	//make a boolean function called IsFullHealth that returns true if the current health is equal to the max health
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		bool IsFullHealth() const;
 };

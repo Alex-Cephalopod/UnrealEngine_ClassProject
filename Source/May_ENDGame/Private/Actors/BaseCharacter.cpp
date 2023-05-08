@@ -98,3 +98,13 @@ void ABaseCharacter::HandleDeath()
 	OwnerDied();
 }
 
+bool ABaseCharacter::CanPickupHealth() const
+{
+	return false;
+}
+
+bool ABaseCharacter::ShouldPickupHealth() const
+{
+	return false;
+}
+

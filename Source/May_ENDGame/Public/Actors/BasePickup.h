@@ -19,7 +19,10 @@ public:
 		class UBoxComponent* CollisionBox;
 
 	UFUNCTION(BlueprintCallable, Category = "Pickup")
-		virtual bool CanPickUp(AActor* OtherActor, bool yes = true) const;
+		virtual bool CanPickUp(AActor* OtherActor) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Pickup")
+		virtual bool ShouldPickUp(AActor* OtherActor) const;
 
 protected:
 	// Called when the game starts or when spawned

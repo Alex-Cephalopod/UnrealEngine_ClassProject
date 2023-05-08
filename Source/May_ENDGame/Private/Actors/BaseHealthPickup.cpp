@@ -6,6 +6,7 @@
 #include "Components/PrimitiveComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Actors/BasePlayer.h"
 
 ABaseHealthPickup::ABaseHealthPickup()
 {
@@ -25,8 +26,26 @@ void ABaseHealthPickup::HandlePickup(AActor* OtherActor, const FHitResult& Sweep
 	UGameplayStatics::ApplyDamage(OtherActor, HealthValue, nullptr, this, nullptr);
 }
 
-bool ABaseHealthPickup::CanPickUp(AActor* OtherActor, bool yes) const
+bool ABaseHealthPickup::CanPickUp(AActor* OtherActor) const
 {
-	//OtherActor->CanPick
-	return yes = false;
+	if (Cast<ABasePlayer>(OtherActor))
+	{
+		return Cast<ABasePlayer>(OtherActor)->CanPickupHealth();
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool ABaseHealthPickup::ShouldPickUp(AActor* OtherActor) const
+{ 
+	if (Cast<ABasePlayer>(OtherActor)) 
+	{
+		return Cast<ABasePlayer>(OtherActor)->ShouldPickupHealth(); 
+	}
+	else
+	{
+		return false;
+	}
 }

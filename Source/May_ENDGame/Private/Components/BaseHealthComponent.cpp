@@ -31,7 +31,7 @@ void UBaseHealthComponent::InitHealth()
 void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 
-	if (FMath::Clamp(CurrentHealth -= Damage, 0.f, MaxHealth) > 0) 
+	if (FMath::Clamp(CurrentHealth -= Damage, 0.f, MaxHealth) > 0)
 	{
 		if (Damage > 0)
 		{
@@ -46,3 +46,7 @@ void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, co
 	}
 }
 
+bool UBaseHealthComponent::IsFullHealth() const
+{
+	return (CurrentHealth/MaxHealth) > 0.99f;
+}

@@ -23,5 +23,8 @@ class MAY_ENDGAME_API IIBasePickup
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintCallable)
-	virtual bool CanPickupHealth(bool yes = false) const = 0;
+		virtual bool CanPickupHealth() const = 0;
+
+	UFUNCTION(BlueprintCallable)
+		virtual bool ShouldPickupHealth() const = 0;
 };

@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/BaseHealthComponent.h"
 
 
 ABasePlayer::ABasePlayer()
@@ -29,9 +30,14 @@ void ABasePlayer::BeginPlay()
 	PlayerController = Cast<APlayerController>(GetController());
 }
 
-bool ABasePlayer::CanPickupHealth(bool yes) const
+bool ABasePlayer::CanPickupHealth() const
 {
-	return yes = true;
+	return true;
+}
+
+bool ABasePlayer::ShouldPickupHealth() const
+{
+	return !HealthComponent->IsFullHealth();
 }
 
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
