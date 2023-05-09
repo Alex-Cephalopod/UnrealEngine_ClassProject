@@ -65,17 +65,27 @@ ABaseBullet::ABaseBullet()
 void ABaseBullet::BeginPlay()
 {
 	Super::BeginPlay();
-	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABaseBullet::HandleCollision);
+	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABaseBullet::OnComponentBeginOverlap);
 
-	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ABaseBullet::K2_DestroyActor, TimeToDestroy, false); 
+	DestroyTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(DestroyTimerHandle, this, &ABaseBullet::K2_DestroyActor, TimeToDestroy, false); 
 }
 
-void ABaseBullet::HandleCollision(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
+void ABaseBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-	UGameplayStatics::ApplyDamage(OtherActor, Damage, GetInstigatorController(), GetInstigator(), nullptr);
-	
-	Destroy();
+	HandleOverlap(OtherActor, OtherComp, SweepResult);
+}
+
+void ABaseBullet::HandleOverlap(AActor* OtherActor, UPrimitiveComponent* OtherComp, const FHitResult& SweepResult)
+{
+	UGameplayStatics::ApplyDamage(OtherActor, Damage, GetInstigatorController(), GetInstigator(), nullptr); 
+
+	Destroy(); 
+}
+
+void ABaseBullet::SpecialAttack()
+{
+
 }
 

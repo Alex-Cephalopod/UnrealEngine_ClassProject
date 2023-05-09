@@ -14,7 +14,18 @@ class MAY_ENDGAME_API ABaseLauncher : public ABaseWeapon
 {
 	GENERATED_BODY()
 
+public:
+	ABaseLauncher();
+
 protected:
 	virtual void BeginPlay() override;
+
+public:
+	ABaseBullet* Attacks() override;
+
+	void SpecialAttack() override;
+
+	UFUNCTION()
+		void RemoveDeadBullet(AActor* DestroyedBullet);
 	
 };

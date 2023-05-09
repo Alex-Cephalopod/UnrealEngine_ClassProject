@@ -23,20 +23,31 @@ void ABaseWeapon::BeginPlay()
 	PawnOwner = Cast<APawn>(GetParentActor());	
 }
 
-void ABaseWeapon::Attacks()
+ABaseBullet* ABaseWeapon::Attacks()
 {
 	if (CanShoot()) //this for some reason throws a nullptr after repossessing
 	{
 		FActorSpawnParameters SpawnParams; 
 		SpawnParams.Instigator = PawnOwner; 
-		SpawnParams.Owner = PawnOwner->GetController(); 
+		//SpawnParams.Owner = PawnOwner->GetController(); 
 
-		GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams); 
+		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams); 
 
 		Animating = true;
 
 		OnAttack.Broadcast();
+
+		return Bullet;
 	}
+	else
+	{
+		return Bullet;
+	}
+}
+
+void ABaseWeapon::SpecialAttack()
+{
+	//do nothing
 }
 
 bool ABaseWeapon::CanShoot() const

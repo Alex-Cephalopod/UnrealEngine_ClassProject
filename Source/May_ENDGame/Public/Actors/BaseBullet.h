@@ -23,6 +23,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UProjectileMovementComponent* ProjectileMovement;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FTimerHandle DestroyTimerHandle;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float TimeToDestroy;
@@ -42,7 +45,13 @@ protected:
 
 public:	
 	UFUNCTION() 
-		void HandleCollision(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
+		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
 			const FHitResult& SweepResult);
+
+	UFUNCTION()
+		virtual void HandleOverlap(AActor* OtherActor, UPrimitiveComponent* OtherComp, const FHitResult& SweepResult);
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		virtual void SpecialAttack();
 
 };

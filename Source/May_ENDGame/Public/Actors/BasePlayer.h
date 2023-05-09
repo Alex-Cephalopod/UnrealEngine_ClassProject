@@ -22,7 +22,6 @@ public:
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
-	void PlayerShoot();
 	void Jump();
 	
 	void HandleDeath() override;

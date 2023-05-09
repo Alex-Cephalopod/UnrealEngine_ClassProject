@@ -20,6 +20,8 @@ ABaseCharacter::ABaseCharacter()
 
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
 	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -90.0f));
+	//set the generate overlap events of the mesh to true
+	GetMesh()->SetGenerateOverlapEvents(true);
 
 	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
 	WeaponChild->SetupAttachment(this->GetMesh(), "WeaponTransform");
@@ -63,6 +65,11 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ABaseCharacter::Attacks()
 {
 	Weapon->Attacks();
+}
+
+void ABaseCharacter::SpecialAttack()
+{
+	Weapon->SpecialAttack();
 }
 
 void ABaseCharacter::Damaged() 

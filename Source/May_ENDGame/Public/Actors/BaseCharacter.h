@@ -45,6 +45,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void Attacks();
 
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		void SpecialAttack();
+
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		void Damaged();
 

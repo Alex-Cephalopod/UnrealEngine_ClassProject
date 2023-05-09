@@ -21,8 +21,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void PlayAttack();
 
-	UFUNCTION(BlueprintCallable, Category = "Function")
+	UFUNCTION(BlueprintNativeEvent, Category = "Function")
 		void PlayDamaged();
+
+	virtual void PlayDamaged_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void PlayDeath();
@@ -45,7 +47,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		class UAnimSequence* AttackAnim;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UAnimSequence* DamagedAnim;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

@@ -32,6 +32,9 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Weapon")
 		FWeaponDelegate OnAttack;
 
+	UPROPERTY()
+		TArray<ABaseBullet*> Bullets;
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -40,9 +43,14 @@ protected:
 		TSubclassOf<class ABaseBullet> BulletClass;
 
 public:	
-	
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-		void Attacks();
+		virtual ABaseBullet* Attacks();
+
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		virtual void SpecialAttack();
+
+	UPROPERTY()
+		ABaseBullet* Bullet;
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		bool CanShoot() const;

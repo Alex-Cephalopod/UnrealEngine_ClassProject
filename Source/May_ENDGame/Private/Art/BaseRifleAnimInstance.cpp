@@ -51,7 +51,7 @@ void UBaseRifleAnimInstance::PlayAttack()
 	PlaySlotAnimationAsDynamicMontage(AttackAnim, ActionSlot); 
 }
 
-void UBaseRifleAnimInstance::PlayDamaged()
+void UBaseRifleAnimInstance::PlayDamaged_Implementation()
 {
 	PlaySlotAnimationAsDynamicMontage(DamagedAnim, HurtSlot);
 }

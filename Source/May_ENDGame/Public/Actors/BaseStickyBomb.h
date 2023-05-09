@@ -18,8 +18,15 @@ public:
 	//constructor
 	ABaseStickyBomb();
 
+	UPROPERTY()
+		float DamageRadius;
+
 protected:
 
 public:
+
+	void HandleOverlap(AActor* OtherActor, UPrimitiveComponent* OtherComp, const FHitResult& SweepResult) override;
+
+	void SpecialAttack() override;
 	
 };

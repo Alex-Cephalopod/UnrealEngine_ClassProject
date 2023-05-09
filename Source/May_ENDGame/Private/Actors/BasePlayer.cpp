@@ -51,7 +51,8 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ABasePlayer::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABasePlayer::PlayerShoot);
+	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABaseCharacter::Attacks);
+	PlayerInputComponent->BindAction("SpecialAttack", IE_Pressed, this, &ABaseCharacter::SpecialAttack);
 
 }
 
@@ -65,11 +66,6 @@ void ABasePlayer::MoveRight(float Value)
 {
 	FVector Right = GetActorRightVector();
 	AddMovementInput(Right, Value);
-}
-
-void ABasePlayer::PlayerShoot()
-{
-	Attacks();
 }
 
 void ABasePlayer::Jump()
