@@ -13,5 +13,8 @@ UCLASS()
 class MAY_ENDGAME_API ABaseLauncher : public ABaseWeapon
 {
 	GENERATED_BODY()
+
+protected:
+	virtual void BeginPlay() override;
 	
 };

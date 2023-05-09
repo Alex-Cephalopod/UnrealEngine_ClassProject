@@ -2,4 +2,10 @@
 
 
 #include "Actors/BaseLauncher.h"
+#include "Actors/BaseStickyBomb.h"
 
+void ABaseLauncher::BeginPlay()
+{
+	Super::BeginPlay();
+	BulletClass = ABaseStickyBomb::StaticClass();
+}
