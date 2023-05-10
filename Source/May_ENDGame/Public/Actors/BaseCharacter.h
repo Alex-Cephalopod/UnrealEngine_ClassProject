@@ -34,6 +34,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class ABaseWeapon> WeaponClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class ABaseLauncher> LauncherClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class ABaseWeapon> RifleClass;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -65,6 +71,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
 		virtual void HandleDeath();
+
+	UFUNCTION(BlueprintCallable, Category = "Weapons")
+		void SwapWeapons();
+
+	UFUNCTION(BlueprintCallable, Category = "References")
+		void SetReferences();
 
 	bool CanPickupHealth() const override;
 	bool ShouldPickupHealth() const override;

@@ -3,6 +3,7 @@
 
 #include "Actors/BaseCharacter.h"
 #include "Actors/BaseWeapon.h"
+#include "Actors/BaseLauncher.h"
 #include "Components/ChildActorComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SceneComponent.h" 
@@ -35,11 +36,7 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	WeaponChild->SetChildActorClass(WeaponClass);
-
-	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());
-
-	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
+	SetReferences();
 
 	HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
 
@@ -103,6 +100,29 @@ void ABaseCharacter::HandleDeath()
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	PlayDeath();
 	OwnerDied();
+}
+
+void ABaseCharacter::SwapWeapons()
+{
+	if (WeaponClass == RifleClass)
+	{
+		WeaponClass = LauncherClass;
+		SetReferences();
+	}
+	else
+	{
+		WeaponClass = RifleClass;
+		SetReferences();
+	}
+}
+
+void ABaseCharacter::SetReferences()
+{
+	WeaponChild->SetChildActorClass(WeaponClass);
+
+	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());
+
+	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
 bool ABaseCharacter::CanPickupHealth() const

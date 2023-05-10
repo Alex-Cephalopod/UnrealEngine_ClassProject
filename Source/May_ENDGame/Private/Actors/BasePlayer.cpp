@@ -53,6 +53,7 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABaseCharacter::Attacks);
 	PlayerInputComponent->BindAction("SpecialAttack", IE_Pressed, this, &ABaseCharacter::SpecialAttack);
+	PlayerInputComponent->BindAction("SwitchWeapon", IE_Pressed, this, &ABaseCharacter::SwapWeapons);
 
 }
 

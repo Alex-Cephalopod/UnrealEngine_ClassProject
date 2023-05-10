@@ -4,9 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Art/BaseRifleAnimInstance.h"
 #include "BaseWeapon.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE (FWeaponDelegate);
+
+//make a USTRUCT to hold the weapon data
+USTRUCT(BlueprintType)
+struct FWeaponSyncInfo {
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		TSubclassOf<class UBaseRifleAnimInstance> AnimInstance;
+};
 
 UCLASS()
 class MAY_ENDGAME_API ABaseWeapon : public AActor
@@ -35,6 +45,9 @@ public:
 	UPROPERTY()
 		TArray<ABaseBullet*> Bullets;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FWeaponSyncInfo WeaponSync;
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -48,9 +61,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		virtual void SpecialAttack();
-
-	UPROPERTY()
-		ABaseBullet* Bullet;
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		bool CanShoot() const;

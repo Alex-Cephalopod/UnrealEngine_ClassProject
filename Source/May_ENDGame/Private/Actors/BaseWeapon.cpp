@@ -3,6 +3,7 @@
 
 #include "Actors/BaseWeapon.h"
 #include "Actors/BaseBullet.h"
+#include "Art/BaseRifleAnimInstance.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -25,6 +26,7 @@ void ABaseWeapon::BeginPlay()
 
 ABaseBullet* ABaseWeapon::Attacks()
 {
+	ABaseBullet* Bullet = nullptr;
 	if (CanShoot()) //this for some reason throws a nullptr after repossessing
 	{
 		FActorSpawnParameters SpawnParams; 

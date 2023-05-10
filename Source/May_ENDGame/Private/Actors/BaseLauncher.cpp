@@ -17,8 +17,7 @@ void ABaseLauncher::BeginPlay()
 
 ABaseBullet* ABaseLauncher::Attacks()
 {
-	
-	Bullet = Super::Attacks();
+	ABaseBullet* Bullet = Super::Attacks();
 	if (Bullet)
 	{
 		Bullets.Add(Bullet);
