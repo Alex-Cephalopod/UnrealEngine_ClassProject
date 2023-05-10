@@ -38,11 +38,7 @@ void ABaseCharacter::BeginPlay()
 
 	SetReferences();
 
-	HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
-
-	Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack);
-
-	AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded);
+	BindWeapAndAnimEvents();
 
 	HealthComponent->OnDeath.AddDynamic(this, &ABaseCharacter::HandleDeath);
 }
@@ -108,11 +104,13 @@ void ABaseCharacter::SwapWeapons()
 	{
 		WeaponClass = LauncherClass;
 		SetReferences();
+		BindWeapAndAnimEvents();
 	}
 	else
 	{
 		WeaponClass = RifleClass;
 		SetReferences();
+		BindWeapAndAnimEvents();
 	}
 }
 
@@ -122,7 +120,37 @@ void ABaseCharacter::SetReferences()
 
 	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());
 
+	GetMesh()->SetAnimInstanceClass(Weapon->WeaponSync.AnimInstance);
+
 	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
+}
+
+void ABaseCharacter::BindWeapAndAnimEvents()
+{
+	//if HealthComponent on damaged is bound to this class, unbind it then bind it again
+	if (HealthComponent->OnDamaged.IsBound())
+	{
+		HealthComponent->OnDamaged.RemoveDynamic(this, &ABaseCharacter::Damaged); 
+		HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged); 
+	}
+	else
+		HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
+
+	if (Weapon->OnAttack.IsBound())
+	{
+		Weapon->OnAttack.RemoveDynamic(this, &ABaseCharacter::PlayAttack);
+		Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack);
+	}
+	else
+		Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack); 
+
+	if (AnimInstance->OnActionEnded.IsBound())
+	{
+		AnimInstance->OnActionEnded.RemoveDynamic(this, &ABaseCharacter::AnimEnded);
+		AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded);
+	}
+	else
+	AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded); 
 }
 
 bool ABaseCharacter::CanPickupHealth() const

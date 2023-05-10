@@ -78,6 +78,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "References")
 		void SetReferences();
 
+	UFUNCTION(BlueprintCallable, Category = "References")
+		void BindWeapAndAnimEvents();
+
 	bool CanPickupHealth() const override;
 	bool ShouldPickupHealth() const override;
 
