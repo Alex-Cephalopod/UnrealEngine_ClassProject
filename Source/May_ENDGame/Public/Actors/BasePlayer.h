@@ -36,7 +36,6 @@ public:
 
 	void SetReferences() override;
 
-	//OVERRIDE GETBASEAIMROTATION
 	virtual FRotator GetBaseAimRotation() const override;
 
 	

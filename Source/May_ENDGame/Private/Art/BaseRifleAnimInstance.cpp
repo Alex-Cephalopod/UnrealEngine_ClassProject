@@ -18,8 +18,8 @@ void UBaseRifleAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	APawn* Pawn = TryGetPawnOwner();
 	if (Pawn)
 	{
-		Speed = Pawn->GetVelocity().Size(); 
-		Direction = CalculateDirection(Pawn->GetVelocity(), Pawn->GetActorRotation()); 
+		Speed = Pawn->GetVelocity().Size();
+		Direction = CalculateDirection(Pawn->GetVelocity(), Pawn->GetActorRotation());
 	}
 	else
 	{

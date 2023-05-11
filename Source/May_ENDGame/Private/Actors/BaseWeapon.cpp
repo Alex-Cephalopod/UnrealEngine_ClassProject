@@ -69,9 +69,3 @@ void ABaseWeapon::OwnerDied()
 	Dead = true;
 }
 
-FRotator ABaseWeapon::GetBaseAimRotation() const
-{
-	return PawnOwner->GetBaseAimRotation();
-}
-
-//overri

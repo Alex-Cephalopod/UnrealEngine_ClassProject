@@ -6,7 +6,7 @@
 #include "Actors/BaseLauncher.h"
 #include "Components/ChildActorComponent.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "Components/SceneComponent.h" 
+#include "Components/SceneComponent.h"
 #include "Art/BaseRifleAnimInstance.h"
 #include "Components/BaseHealthComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
