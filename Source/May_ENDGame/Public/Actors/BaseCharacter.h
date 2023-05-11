@@ -76,7 +76,7 @@ public:
 		void SwapWeapons();
 
 	UFUNCTION(BlueprintCallable, Category = "References")
-		void SetReferences();
+		virtual void SetReferences();
 
 	UFUNCTION(BlueprintCallable, Category = "References")
 		void BindWeapAndAnimEvents();

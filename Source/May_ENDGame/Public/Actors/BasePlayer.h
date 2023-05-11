@@ -34,6 +34,8 @@ public:
 
 	bool ShouldPickupHealth() const override; 
 
+	void SetReferences() override;
+
 
 protected:
 	
@@ -45,4 +47,12 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		class APlayerController* PlayerController;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class UHUDWidget> HUDWidgetClass;
+
+	//create a user widget variable
+	UPROPERTY()
+		class UUserWidget* HUDWidget;
+
 };

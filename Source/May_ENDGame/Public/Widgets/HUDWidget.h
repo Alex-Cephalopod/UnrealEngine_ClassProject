@@ -17,5 +17,35 @@ class MAY_ENDGAME_API UHUDWidget : public UUserWidget
 protected:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-		class UImage* CrossHairImage;
+		class UImage* CrosshairImage;
+
+	UPROPERTY(BlueprintReadOnly)
+		class UMaterialInstanceDynamic* DynamicMaterial;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FLinearColor DangerColor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FLinearColor SafeColor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FName ColorKey;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FVector WorldPos;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FVector WorldDir;
+
+public:
+
+	virtual void NativeConstruct() override;
+
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
+	void SetColor(FLinearColor Color);
+
+	void SetDangerColor();
+
+	void SetSafeColor();
 };

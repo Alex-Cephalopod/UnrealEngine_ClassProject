@@ -6,6 +6,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/BaseHealthComponent.h"
+#include "Widgets/HUDWidget.h"
+#include "Blueprint/UserWidget.h"
 
 
 ABasePlayer::ABasePlayer()
@@ -26,8 +28,8 @@ ABasePlayer::ABasePlayer()
 void ABasePlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
-	PlayerController = Cast<APlayerController>(GetController());
+	//add widget to viewport
+	HUDWidget->AddToViewport();
 }
 
 bool ABasePlayer::CanPickupHealth() const
@@ -38,6 +40,13 @@ bool ABasePlayer::CanPickupHealth() const
 bool ABasePlayer::ShouldPickupHealth() const
 {
 	return !HealthComponent->IsFullHealth();
+}
+
+void ABasePlayer::SetReferences()
+{
+	Super::SetReferences();
+	PlayerController = Cast<APlayerController>(GetController());
+	HUDWidget = CreateWidget<UHUDWidget>(GetWorld(), HUDWidgetClass);
 }
 
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

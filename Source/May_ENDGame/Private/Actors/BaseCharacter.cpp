@@ -119,10 +119,11 @@ void ABaseCharacter::SetReferences()
 	WeaponChild->SetChildActorClass(WeaponClass);
 
 	Weapon = Cast<ABaseWeapon>(WeaponChild->GetChildActor());
-
+	
 	GetMesh()->SetAnimInstanceClass(Weapon->WeaponSync.AnimInstance);
 
 	AnimInstance = Cast<UBaseRifleAnimInstance>(GetMesh()->GetAnimInstance());
+	
 }
 
 void ABaseCharacter::BindWeapAndAnimEvents()
