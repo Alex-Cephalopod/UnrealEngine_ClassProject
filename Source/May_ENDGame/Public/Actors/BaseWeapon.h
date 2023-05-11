@@ -35,9 +35,6 @@ public:
 	UPROPERTY()
 		class APawn* PawnOwner;
 
-	UPROPERTY()
-		class ABaseCustomPawn* CustomPawnOwner;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool Animating;
 
@@ -75,5 +72,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void OwnerDied();
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		FRotator GetBaseAimRotation() const;
 
 };

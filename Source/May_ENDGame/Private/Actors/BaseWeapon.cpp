@@ -4,8 +4,7 @@
 #include "Actors/BaseWeapon.h"
 #include "Actors/BaseBullet.h"
 #include "Art/BaseRifleAnimInstance.h"
-#include "GameFramework/Pawn.h"
-#include "Actors/BaseCustomPawn.h"
+#include "Actors/BasePlayer.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -24,15 +23,6 @@ void ABaseWeapon::BeginPlay()
 	Super::BeginPlay();
 	BulletClass = ABaseBullet::StaticClass(); 
 	PawnOwner = Cast<APawn>(GetParentActor()); 
-
-	CustomPawnOwner = Cast<ABaseCustomPawn>(GetParentActor());
-
-	if (CustomPawnOwner == nullptr)
-	{
-		//print to screen in red that there is no custom pawn owner for this weapon in all caps
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("NO CUSTOM PAWN OWNER FOR THIS WEAPON"), true, FVector2D(2.f, 2.f));
-		//thank you :)
-	}
 }
 
 ABaseBullet* ABaseWeapon::Attacks()
@@ -43,7 +33,7 @@ ABaseBullet* ABaseWeapon::Attacks()
 		FActorSpawnParameters SpawnParams; 
 		SpawnParams.Instigator = PawnOwner; 
 
-		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams); 
+		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), GetBaseAimRotation(), SpawnParams);
 
 		Animating = true;
 
@@ -75,4 +65,19 @@ void ABaseWeapon::AnimationEnded()
 void ABaseWeapon::OwnerDied()
 {
 	Dead = true;
+}
+
+FRotator ABaseWeapon::GetBaseAimRotation() const
+{
+	//if PawnOwner is not of ABasePlayer, then return the rotation of the weapon
+	if (Cast<ABasePlayer>(PawnOwner->GetParentActor()))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I did it")));
+		return PawnOwner->GetBaseAimRotation();
+	}
+	else {
+		FRotator Rotate = PawnOwner->GetBaseAimRotation();
+		return Rotate; 
+		
+	}
 }
