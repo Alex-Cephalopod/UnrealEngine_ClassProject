@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Art/BaseRifleAnimInstance.h"
+#include "GameFramework/Pawn.h"
+#include "BaseCustomPawn.h"
 #include "BaseWeapon.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE (FWeaponDelegate);
@@ -32,6 +34,9 @@ public:
 
 	UPROPERTY()
 		class APawn* PawnOwner;
+
+	UPROPERTY()
+		class ABaseCustomPawn* CustomPawnOwner;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool Animating;

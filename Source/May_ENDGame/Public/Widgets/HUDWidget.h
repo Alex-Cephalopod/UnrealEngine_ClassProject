@@ -13,6 +13,17 @@ UCLASS()
 class MAY_ENDGAME_API UHUDWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+private:
+
+	UPROPERTY()
+		bool bValidHit;
+
+	UPROPERTY()
+		FVector EndPoint;
+
+	UPROPERTY()
+		FVector HitLocation;
 	
 protected:
 
@@ -48,4 +59,8 @@ public:
 	void SetDangerColor();
 
 	void SetSafeColor();
+
+	//create a function called GetAimDirection, with an output of boolean, and 2 vectors
+	UFUNCTION(BlueprintCallable)
+		bool GetEnd(FVector& _Hit, FVector& _EndPoint);
 };

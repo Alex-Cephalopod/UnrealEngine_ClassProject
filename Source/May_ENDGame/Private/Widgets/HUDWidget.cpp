@@ -42,13 +42,15 @@ void UHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(GetOwningPlayerPawn());
 
+	EndPoint = WorldPos + (WorldDir * 100000);
+
 	FHitResult HitResult;
 
-	bool bHit = UKismetSystemLibrary::LineTraceSingleForObjects(GetWorld(), WorldPos, WorldPos + (WorldDir * 100000), ObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
+	bValidHit = UKismetSystemLibrary::LineTraceSingleForObjects(GetWorld(), WorldPos, EndPoint, ObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
 
-	if (bHit)
+	if (bValidHit)
 	{
-		//cast hitResult.hitactor to a pawn
+		HitLocation = HitResult.Location;
 		APawn* Pawn = Cast<APawn>(HitResult.Actor);
 		if (Pawn)
 		{
@@ -78,4 +80,11 @@ void UHUDWidget::SetDangerColor()
 void UHUDWidget::SetSafeColor()
 {
 	DynamicMaterial->SetVectorParameterValue(ColorKey, SafeColor);
+}
+
+bool UHUDWidget::GetEnd(FVector& _Hit, FVector& _EndPoint)
+{
+	_Hit = HitLocation;
+	_EndPoint = EndPoint;
+	return bValidHit;
 }

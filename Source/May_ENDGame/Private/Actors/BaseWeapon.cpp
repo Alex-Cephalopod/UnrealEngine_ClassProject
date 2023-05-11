@@ -21,7 +21,16 @@ void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 	BulletClass = ABaseBullet::StaticClass();
-	PawnOwner = Cast<APawn>(GetParentActor());	
+	PawnOwner = Cast<APawn>(GetParentActor());
+
+	CustomPawnOwner = Cast<ABaseCustomPawn>(GetParentActor());
+
+	if (CustomPawnOwner == nullptr)
+	{
+		//print to screen in red that there is no custom pawn owner for this weapon in all caps
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("NO CUSTOM PAWN OWNER FOR THIS WEAPON"), true, FVector2D(2.f, 2.f));
+		//thank you :)
+	}
 }
 
 ABaseBullet* ABaseWeapon::Attacks()
@@ -66,8 +75,3 @@ void ABaseWeapon::OwnerDied()
 {
 	Dead = true;
 }
-
-
-
-
-
