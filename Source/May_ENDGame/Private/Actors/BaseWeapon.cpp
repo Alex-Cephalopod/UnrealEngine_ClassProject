@@ -4,6 +4,8 @@
 #include "Actors/BaseWeapon.h"
 #include "Actors/BaseBullet.h"
 #include "Art/BaseRifleAnimInstance.h"
+#include "GameFramework/Pawn.h"
+#include "Actors/BaseCustomPawn.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -20,8 +22,8 @@ ABaseWeapon::ABaseWeapon()
 void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
-	BulletClass = ABaseBullet::StaticClass();
-	PawnOwner = Cast<APawn>(GetParentActor());
+	BulletClass = ABaseBullet::StaticClass(); 
+	PawnOwner = Cast<APawn>(GetParentActor()); 
 
 	CustomPawnOwner = Cast<ABaseCustomPawn>(GetParentActor());
 
@@ -40,7 +42,6 @@ ABaseBullet* ABaseWeapon::Attacks()
 	{
 		FActorSpawnParameters SpawnParams; 
 		SpawnParams.Instigator = PawnOwner; 
-		//SpawnParams.Owner = PawnOwner->GetController(); 
 
 		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams); 
 
