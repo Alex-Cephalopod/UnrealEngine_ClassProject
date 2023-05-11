@@ -60,7 +60,6 @@ public:
 
 	void SetSafeColor();
 
-	//create a function called GetAimDirection, with an output of boolean, and 2 vectors
 	UFUNCTION(BlueprintCallable)
-		bool GetEnd(FVector& _Hit, FVector& _EndPoint);
+		bool GetEnd(FVector& _Hit, FVector& _EndPoint) const;
 };

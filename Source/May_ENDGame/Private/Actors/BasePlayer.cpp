@@ -8,6 +8,7 @@
 #include "Components/BaseHealthComponent.h"
 #include "Widgets/HUDWidget.h"
 #include "Blueprint/UserWidget.h"
+#include "Actors/BaseWeapon.h"
 
 
 ABasePlayer::ABasePlayer()
@@ -46,23 +47,45 @@ void ABasePlayer::SetReferences()
 {
 	Super::SetReferences();
 	PlayerController = Cast<APlayerController>(GetController());
-	HUDWidget = CreateWidget<UHUDWidget>(GetWorld(), HUDWidgetClass);
+	if (!HUDWidget)
+	{
+		HUDWidget = CreateWidget<UHUDWidget>(GetWorld(), HUDWidgetClass);
+	}
+}
+
+FRotator ABasePlayer::GetBaseAimRotation() const
+{
+	FVector Hit;
+	FVector EndPoint;
+	FVector Destination;
+	if (HUDWidget->GetEnd(Hit, EndPoint))
+	{
+		Destination = Hit;
+	}
+	else
+	{
+		Destination = EndPoint;
+	}
+
+	Destination -= Weapon->WeaponMesh->GetSocketLocation("MuzzleFlashSocket");
+
+	return Destination.Rotation(); 
 }
 
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("TurnTo", this, &APawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &ABasePlayer::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("TurnTo", this, &ABasePlayer::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("MoveForward", this, &ABasePlayer::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ABasePlayer::MoveRight);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ABasePlayer::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABaseCharacter::Attacks);
-	PlayerInputComponent->BindAction("SpecialAttack", IE_Pressed, this, &ABaseCharacter::SpecialAttack);
-	PlayerInputComponent->BindAction("SwitchWeapon", IE_Pressed, this, &ABaseCharacter::SwapWeapons);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ABasePlayer::StopJumping);
+	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABasePlayer::Attacks);
+	PlayerInputComponent->BindAction("SpecialAttack", IE_Pressed, this, &ABasePlayer::SpecialAttack);
+	PlayerInputComponent->BindAction("SwitchWeapon", IE_Pressed, this, &ABasePlayer::SwapWeapons);
 
 }
 
@@ -88,4 +111,6 @@ void ABasePlayer::HandleDeath()
 	Super::HandleDeath();
 	DisableInput(PlayerController);
 }
+
+//ITS HERE HERE NOT ANYWHERE ELSE IN HERE GOD DANG IT
 

@@ -82,7 +82,7 @@ void UHUDWidget::SetSafeColor()
 	DynamicMaterial->SetVectorParameterValue(ColorKey, SafeColor);
 }
 
-bool UHUDWidget::GetEnd(FVector& _Hit, FVector& _EndPoint)
+bool UHUDWidget::GetEnd(FVector& _Hit, FVector& _EndPoint) const
 {
 	_Hit = HitLocation;
 	_EndPoint = EndPoint;

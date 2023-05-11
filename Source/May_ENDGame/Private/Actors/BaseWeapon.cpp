@@ -5,6 +5,8 @@
 #include "Actors/BaseBullet.h"
 #include "Art/BaseRifleAnimInstance.h"
 #include "Actors/BasePlayer.h"
+#include "GameFramework/Pawn.h"
+#include "Actors/BaseCustomPawn.h"
 
 // Sets default values
 ABaseWeapon::ABaseWeapon()
@@ -33,7 +35,7 @@ ABaseBullet* ABaseWeapon::Attacks()
 		FActorSpawnParameters SpawnParams; 
 		SpawnParams.Instigator = PawnOwner; 
 
-		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), GetBaseAimRotation(), SpawnParams);
+		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams);
 
 		Animating = true;
 
@@ -69,15 +71,7 @@ void ABaseWeapon::OwnerDied()
 
 FRotator ABaseWeapon::GetBaseAimRotation() const
 {
-	//if PawnOwner is not of ABasePlayer, then return the rotation of the weapon
-	if (Cast<ABasePlayer>(PawnOwner->GetParentActor()))
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("I did it")));
-		return PawnOwner->GetBaseAimRotation();
-	}
-	else {
-		FRotator Rotate = PawnOwner->GetBaseAimRotation();
-		return Rotate; 
-		
-	}
+	return PawnOwner->GetBaseAimRotation();
 }
+
+//overri

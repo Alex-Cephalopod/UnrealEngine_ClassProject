@@ -36,6 +36,11 @@ public:
 
 	void SetReferences() override;
 
+	//OVERRIDE GETBASEAIMROTATION
+	virtual FRotator GetBaseAimRotation() const override;
+
+	
+
 
 protected:
 	
@@ -53,6 +58,6 @@ protected:
 
 	//create a user widget variable
 	UPROPERTY()
-		class UUserWidget* HUDWidget;
+		class UHUDWidget* HUDWidget;
 
 };

@@ -6,6 +6,8 @@
 ABaseAI::ABaseAI()
 {
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	GetBaseAimRotation();
 }
 
 void ABaseAI::Tick(float DeltaTime)

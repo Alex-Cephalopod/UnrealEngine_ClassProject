@@ -57,6 +57,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class ABaseBullet> BulletClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<class UHUDWidget> HUDWidgetClass;
+
 public:	
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		virtual ABaseBullet* Attacks();
