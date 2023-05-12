@@ -9,7 +9,6 @@
 
 void UMainMenuWidget::NativePreConstruct()
 {
-	//cast game instance to base game instance
 	GameInstance = Cast<UBaseGameInstance>(GetGameInstance());
 	if (GameInstance == nullptr) 
 	{
@@ -26,7 +25,6 @@ void UMainMenuWidget::NativeConstruct()
 	StartButton->OnClicked.AddDynamic(this, &UMainMenuWidget::OnStartButtonClicked);
 }
 
-//create a function to call the delegate when the quit button is clicked
 void UMainMenuWidget::OnQuitButtonClicked()
 {
 	GameInstance->QuitGame();

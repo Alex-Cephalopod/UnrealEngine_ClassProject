@@ -15,18 +15,16 @@ class MAY_ENDGAME_API UMainMenuWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
-	//call the begin play function
+
 	virtual void NativePreConstruct() override;
 
 	virtual void NativeConstruct() override;
 
 public:
 
-	//create a ButtonWText variable
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UButtonWithTextWidget* StartButton;
 
-	//another one for quit
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UButtonWithTextWidget* QuitButton;
 

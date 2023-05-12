@@ -11,7 +11,6 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE (FWeaponDelegate);
 
-//make a USTRUCT to hold the weapon data
 USTRUCT(BlueprintType)
 struct FWeaponSyncInfo {
 	GENERATED_BODY()

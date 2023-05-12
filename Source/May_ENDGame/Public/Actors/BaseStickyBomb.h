@@ -15,7 +15,6 @@ class MAY_ENDGAME_API ABaseStickyBomb : public ABaseBullet
 	GENERATED_BODY()
 
 public:
-	//constructor
 	ABaseStickyBomb();
 
 	UPROPERTY()

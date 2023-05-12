@@ -26,10 +26,8 @@ public:
 	
 	void HandleDeath() override;
 
-	//get a begin play function to get the player controller
 	virtual void BeginPlay() override;
 
-	//implement the interface function
 	bool CanPickupHealth() const override;
 
 	bool ShouldPickupHealth() const override; 
@@ -37,9 +35,6 @@ public:
 	void SetReferences() override;
 
 	virtual FRotator GetBaseAimRotation() const override;
-
-	
-
 
 protected:
 	
@@ -55,7 +50,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class UHUDWidget> HUDWidgetClass;
 
-	//create a user widget variable
 	UPROPERTY()
 		class UHUDWidget* HUDWidget;
 

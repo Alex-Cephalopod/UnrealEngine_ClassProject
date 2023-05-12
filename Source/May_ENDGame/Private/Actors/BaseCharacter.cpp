@@ -21,7 +21,6 @@ ABaseCharacter::ABaseCharacter()
 
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
 	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -90.0f));
-	//set the generate overlap events of the mesh to true
 	GetMesh()->SetGenerateOverlapEvents(true);
 
 	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
@@ -128,7 +127,6 @@ void ABaseCharacter::SetReferences()
 
 void ABaseCharacter::BindWeapAndAnimEvents()
 {
-	//if HealthComponent on damaged is bound to this class, unbind it then bind it again
 	if (!HealthComponent->OnDamaged.IsBound())
 	{
 		HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
@@ -143,7 +141,6 @@ void ABaseCharacter::BindWeapAndAnimEvents()
 	{
 		AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded);
 	}
-
 }
 
 bool ABaseCharacter::CanPickupHealth() const
