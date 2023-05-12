@@ -12,14 +12,9 @@ class MAY_ENDGAME_API ABaseCustomPawn : public APawn
 	GENERATED_BODY()
 
 public:
-	//call constructor
 	
-
 protected:
 	
-
 public:	
 	
-	
-
 };

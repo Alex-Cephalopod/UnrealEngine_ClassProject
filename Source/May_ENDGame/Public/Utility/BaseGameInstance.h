@@ -16,11 +16,9 @@ class MAY_ENDGAME_API UBaseGameInstance : public UGameInstance
 	
 public:
 
-	//make an array of FName to store the names of the levels
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 		TArray<FName> LevelNames;
 
-	//create an int to store level index
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 		int FirstLevel;
 

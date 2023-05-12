@@ -10,8 +10,6 @@
 ABaseDamagePickup::ABaseDamagePickup()
 {
 	DamageValue = 2.f;
-	//start with tick enabled = false
-	//PrimaryActorTick.bStartWithTickEnabled = false;
 
 	ParticleSystem = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystem"));
 	ParticleSystem->SetRelativeLocation(FVector(0.f, 0.f, -30.f));
@@ -24,7 +22,6 @@ ABaseDamagePickup::ABaseDamagePickup()
 
 void ABaseDamagePickup::HandlePickup(AActor* OtherActor, const FHitResult& SweepResult)
 {
-	//call ApplyDamage, where other actor is OtherActor, the damage value is DamageValue, and the DamageCauser is this
 	UGameplayStatics::ApplyDamage(OtherActor, DamageValue, nullptr , this, nullptr);
 }
 

@@ -2,7 +2,6 @@
 
 
 #include "Art/BaseRifleAnimInstance.h"
-//Include base action ended
 
 UBaseRifleAnimInstance::UBaseRifleAnimInstance()
 {

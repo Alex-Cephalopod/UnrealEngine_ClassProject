@@ -29,7 +29,6 @@ ABasePlayer::ABasePlayer()
 void ABasePlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	//add widget to viewport
 	HUDWidget->AddToViewport();
 }
 
@@ -111,6 +110,4 @@ void ABasePlayer::HandleDeath()
 	Super::HandleDeath();
 	DisableInput(PlayerController);
 }
-
-//ITS HERE HERE NOT ANYWHERE ELSE IN HERE GOD DANG IT
 

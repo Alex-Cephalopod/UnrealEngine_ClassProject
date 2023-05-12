@@ -10,7 +10,6 @@
 
 ABaseHealthPickup::ABaseHealthPickup()
 {
-	//PrimaryActorTick.bStartWithTickEnabled = false;
 	HealthValue = -1.5;
 	
 	CollisionBox->SetRelativeScale3D(FVector(1.5f, 1.5f, 2.f));

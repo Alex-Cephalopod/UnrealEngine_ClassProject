@@ -8,7 +8,6 @@
 #include "GameFramework/Pawn.h"
 #include "Actors/BaseCustomPawn.h"
 
-// Sets default values
 ABaseWeapon::ABaseWeapon()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -19,7 +18,6 @@ ABaseWeapon::ABaseWeapon()
 	SetRootComponent(WeaponMesh);
 }
 
-// Called when the game starts or when spawned
 void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
@@ -30,7 +28,7 @@ void ABaseWeapon::BeginPlay()
 ABaseBullet* ABaseWeapon::Attacks()
 {
 	ABaseBullet* Bullet = nullptr;
-	if (CanShoot()) //this for some reason throws a nullptr after repossessing
+	if (CanShoot())
 	{
 		FActorSpawnParameters SpawnParams; 
 		SpawnParams.Instigator = PawnOwner; 

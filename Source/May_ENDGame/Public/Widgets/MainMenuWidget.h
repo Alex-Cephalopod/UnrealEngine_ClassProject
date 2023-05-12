@@ -28,11 +28,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UButtonWithTextWidget* QuitButton;
 
-	//create a BaseGameInstance variable
 	UPROPERTY(BlueprintReadOnly)
 		class UBaseGameInstance* GameInstance;
 
-	//create a function to call the delegate when the quit button is clicked
 	UFUNCTION(BlueprintCallable)
 		void OnQuitButtonClicked();
 

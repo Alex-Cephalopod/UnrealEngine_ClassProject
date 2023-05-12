@@ -4,7 +4,6 @@
 #include "Widgets/HUDWidget.h"
 #include "Components/Image.h"
 #include "Kismet/KismetSystemLibrary.h"
-//include the SlateBlueprintLibrary
 #include "Blueprint/SlateBlueprintLibrary.h"
 
 void UHUDWidget::NativeConstruct()
@@ -26,7 +25,6 @@ void UHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 	FGeometry CachedGeometry = CrosshairImage->GetCachedGeometry();
 
-	//get absolute size of cached geometry
 	FVector2D AbsoluteSize = CachedGeometry.GetAbsoluteSize();
 	AbsoluteSize *= 0.5f;
 	USlateBlueprintLibrary::LocalToViewport(GetWorld(), CachedGeometry, FVector2D(0, 0), PixelPos, ViewportPos);
@@ -46,7 +44,8 @@ void UHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 	FHitResult HitResult;
 
-	bValidHit = UKismetSystemLibrary::LineTraceSingleForObjects(GetWorld(), WorldPos, EndPoint, ObjectTypes, false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
+	bValidHit = UKismetSystemLibrary::LineTraceSingleForObjects(GetWorld(), WorldPos, EndPoint, ObjectTypes,
+		false, ActorsToIgnore, EDrawDebugTrace::None, HitResult, true);
 
 	if (bValidHit)
 	{

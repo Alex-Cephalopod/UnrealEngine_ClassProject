@@ -15,12 +15,7 @@ class MAY_ENDGAME_API ABaseMainMenuMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	//create a class variable for the main menu widget
-	
 
 protected:
 
-	//call begin play
-	
-	
 };

@@ -5,7 +5,6 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 
-//call the pre construct
 void UButtonWithTextWidget::NativePreConstruct()
 {
 	Super::NativePreConstruct();

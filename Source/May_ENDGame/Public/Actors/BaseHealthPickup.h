@@ -17,7 +17,6 @@ class MAY_ENDGAME_API ABaseHealthPickup : public ABasePickup
 public:
 	ABaseHealthPickup();
 
-	//add a particle system to the pickup
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup Properties")
 		UParticleSystemComponent* ParticleSystem;
 

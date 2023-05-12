@@ -15,7 +15,6 @@ ABaseStickyBomb::ABaseStickyBomb()
 
 	SphereCollision->SetWorldScale3D(CollisionSize);
 
-	//give the mesh the correct material
 	static ConstructorHelpers::FObjectFinder<UMaterialInterface> Material(TEXT("MaterialInstanceConstant'/Game/Art/MI_FlatColor_Green.MI_FlatColor_Green'"));
 	if (Material.Succeeded())
 	{
@@ -26,12 +25,10 @@ ABaseStickyBomb::ABaseStickyBomb()
 
 void ABaseStickyBomb::HandleOverlap(AActor* OtherActor, UPrimitiveComponent* OtherComp, const FHitResult& SweepResult)
 {
-	//cast other comp to a skeletal mesh component
 	USkeletalMeshComponent* SkeletalMesh = Cast<USkeletalMeshComponent>(OtherComp);
-	//if the cast is successful
+
 	if (SkeletalMesh)
 	{
-		//Super::HandleOverlap(OtherActor, OtherComp, SweepResult);
 		ProjectileMovement->StopMovementImmediately();
 		SetActorEnableCollision(false);
 		TeleportTo(SweepResult.ImpactPoint, GetActorRotation());
@@ -47,20 +44,13 @@ void ABaseStickyBomb::HandleOverlap(AActor* OtherActor, UPrimitiveComponent* Oth
 			 case ECC_WorldStatic:
 			 {
 				 ProjectileMovement->StopMovementImmediately();
-				 //stop the timer
+
 				 GetWorldTimerManager().ClearTimer(DestroyTimerHandle);
 				 DestroyTimerHandle.Invalidate();
 
-				 //call the teleport function that takes in a location and a rotation
 				 TeleportTo(SweepResult.Location, GetActorRotation());
 
 				 SphereCollision->OnComponentBeginOverlap.RemoveDynamic(this, &ABaseBullet::OnComponentBeginOverlap);
-
-			 }
-			 case ECC_WorldDynamic:
-
-			 case ECC_Pawn:
-			 {
 
 			 }
 		}
@@ -69,11 +59,9 @@ void ABaseStickyBomb::HandleOverlap(AActor* OtherActor, UPrimitiveComponent* Oth
 
 void ABaseStickyBomb::SpecialAttack()
 {
-	//print a debug message
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Special Attack")); 
-
-	//call apply radial damage
-	UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, GetActorLocation(), DamageRadius, nullptr, TArray<AActor*>(), this, GetInstigatorController(), false, ECC_Visibility);
+	UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, GetActorLocation(),
+		DamageRadius, nullptr, TArray<AActor*>(), this, GetInstigatorController(),
+		false, ECC_Visibility);
 
 	Destroy();
 }

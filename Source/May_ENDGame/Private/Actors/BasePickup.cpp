@@ -12,7 +12,6 @@ ABasePickup::ABasePickup()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = false;
-	/*GetWorld()->GetGameInstance()->GetEngine()->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("BasePickup"));*/
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	CollisionBox->SetCollisionProfileName("OverlapAllDynamic"); 
 	CollisionBox->SetGenerateOverlapEvents(true); 
