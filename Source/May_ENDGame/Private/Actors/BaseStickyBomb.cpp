@@ -51,6 +51,7 @@ void ABaseStickyBomb::HandleOverlap(AActor* OtherActor, UPrimitiveComponent* Oth
 				 TeleportTo(SweepResult.Location, GetActorRotation());
 
 				 SphereCollision->OnComponentBeginOverlap.RemoveDynamic(this, &ABaseBullet::OnComponentBeginOverlap);
+				 break;
 
 			 }
 		}

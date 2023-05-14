@@ -66,4 +66,3 @@ void ABaseWeapon::OwnerDied()
 {
 	Dead = true;
 }
-

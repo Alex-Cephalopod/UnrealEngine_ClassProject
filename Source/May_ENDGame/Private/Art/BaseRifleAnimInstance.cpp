@@ -7,6 +7,7 @@ UBaseRifleAnimInstance::UBaseRifleAnimInstance()
 {
 	DebugAttack = false;
 	DebugDamaged = false;
+	DebugDeath = false;
 	DeathIndex = -1;
 }
 
