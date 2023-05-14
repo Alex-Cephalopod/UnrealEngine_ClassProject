@@ -56,8 +56,21 @@ void UBaseRifleAnimInstance::PlayDamaged_Implementation()
 	PlaySlotAnimationAsDynamicMontage(DamagedAnim, HurtSlot);
 }
 
+void UBaseRifleAnimInstance::PlayDamageWithFloat(float _Percent)
+{
+	PlayDamaged();
+}
+
 void UBaseRifleAnimInstance::PlayDeath()
 {
 	DeathIndex = FMath::RandRange(0, DeathAnims.Num() - 1);
 	CurrentDeathAnim = DeathAnims[DeathIndex];
+	CurrentDeathAnim->GetPlayLength();
+	//set timer by event
+	GetWorld()->GetTimerManager().SetTimer(DeathTimer, this, &UBaseRifleAnimInstance::DeathEnded, CurrentDeathAnim->GetPlayLength(), false);
+}
+
+void UBaseRifleAnimInstance::DeathEnded()
+{
+	OnDeathEnded.Broadcast();
 }

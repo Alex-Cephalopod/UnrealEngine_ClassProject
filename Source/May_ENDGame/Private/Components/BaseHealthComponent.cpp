@@ -35,13 +35,17 @@ void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, co
 	{
 		if (Damage > 0)
 		{
-			OnDamaged.Broadcast();
+			OnDamageHealth.Broadcast(CurrentHealth/MaxHealth);
 			UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
+		}
+		else
+		{
+			OnHealed.Broadcast(CurrentHealth / MaxHealth);
 		}
 	}
 	else {
 		GetOwner()->OnTakeAnyDamage.RemoveDynamic(this, &UBaseHealthComponent::DamageHappened);
-		OnDeath.Broadcast();
+		OnDeathHealth.Broadcast(0);
 		UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
 	}
 }

@@ -12,4 +12,11 @@ void ABaseMenuPlayerController::BeginPlay()
 	UMainMenuWidget* MainMenuWidget;
 	MainMenuWidget = CreateWidget<UMainMenuWidget>(GetWorld(), MainMenuWidgetClass);
 	MainMenuWidget->AddToViewport();
+	
+	FInputModeUIOnly InputModeData;
+	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	InputModeData.SetWidgetToFocus(MainMenuWidget->TakeWidget());
+	SetInputMode(InputModeData);
+
+
 }

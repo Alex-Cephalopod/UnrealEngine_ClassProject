@@ -2,6 +2,7 @@
 
 
 #include "Actors/BaseAI.h"
+#include "Art/BaseRifleAnimInstance.h"
 
 ABaseAI::ABaseAI()
 {
@@ -13,4 +14,12 @@ void ABaseAI::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Attacks();
+}
+
+void ABaseAI::BindWeapAndAnimEvents()
+{
+	Super::BindWeapAndAnimEvents();
+
+	if (!AnimInstance->OnDeathEnded.IsBound())
+		AnimInstance->OnDeathEnded.AddDynamic(this, &ABaseAI::K2_DestroyActor);
 }

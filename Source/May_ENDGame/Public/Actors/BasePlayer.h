@@ -22,9 +22,8 @@ public:
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
-	void Jump();
 	
-	void HandleDeath() override;
+	void HandleDeath(float _Percent) override;
 
 	virtual void BeginPlay() override;
 

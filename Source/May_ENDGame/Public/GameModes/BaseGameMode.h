@@ -13,5 +13,21 @@ UCLASS()
 class MAY_ENDGAME_API ABaseGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+
+public:
+	UPROPERTY()
+		int32 CurrentEnemyCount;
+
+protected:
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere)
+		//make a TSubclassOf AActors
+		TSubclassOf<class AActor> AIClass;
 	
+public:
+
+	UFUNCTION()
+		void RemoveEnemy(AActor* DestroyedActor);
 };

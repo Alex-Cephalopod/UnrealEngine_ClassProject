@@ -50,6 +50,14 @@ void ABasePlayer::SetReferences()
 	{
 		HUDWidget = CreateWidget<UHUDWidget>(GetWorld(), HUDWidgetClass);
 	}
+	if (!HealthComponent->OnDamageHealth.IsBound())
+		HealthComponent->OnDamageHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
+
+	if (!HealthComponent->OnDeathHealth.IsBound())
+		HealthComponent->OnDeathHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
+
+	if (!HealthComponent->OnHealed.IsBound())
+		HealthComponent->OnHealed.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
 }
 
 FRotator ABasePlayer::GetBaseAimRotation() const
@@ -100,14 +108,9 @@ void ABasePlayer::MoveRight(float Value)
 	AddMovementInput(Right, Value);
 }
 
-void ABasePlayer::Jump()
+void ABasePlayer::HandleDeath(float _Percent)
 {
-	Super::Jump();
-}
-
-void ABasePlayer::HandleDeath()
-{
-	Super::HandleDeath();
+	Super::HandleDeath(_Percent);
 	DisableInput(PlayerController);
 }
 

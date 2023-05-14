@@ -71,8 +71,9 @@ void ABaseBullet::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(DestroyTimerHandle, this, &ABaseBullet::K2_DestroyActor, TimeToDestroy, false); 
 }
 
-void ABaseBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
-	const FHitResult& SweepResult)
+void ABaseBullet::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
+		const FHitResult& SweepResult)
 {
 	HandleOverlap(OtherActor, OtherComp, SweepResult);
 }

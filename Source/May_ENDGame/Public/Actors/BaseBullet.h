@@ -45,7 +45,8 @@ protected:
 
 public:	
 	UFUNCTION() 
-		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
+		void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+			UPrimitiveComponent* OtherComp, int32 OtherBodyindex, bool bFromSweep,
 			const FHitResult& SweepResult);
 
 	UFUNCTION()

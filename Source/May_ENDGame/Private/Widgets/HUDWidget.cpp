@@ -5,6 +5,7 @@
 #include "Components/Image.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Blueprint/SlateBlueprintLibrary.h"
+#include "Components/ProgressBar.h"
 
 void UHUDWidget::NativeConstruct()
 {
@@ -86,4 +87,9 @@ bool UHUDWidget::GetEnd(FVector& _Hit, FVector& _EndPoint) const
 	_Hit = HitLocation;
 	_EndPoint = EndPoint;
 	return bValidHit;
+}
+
+void UHUDWidget::SetHealth(float _Percent)
+{
+	HealthBar->SetPercent(_Percent);
 }

@@ -27,10 +27,19 @@ public:
 	virtual void PlayDamaged_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
+		void PlayDamageWithFloat(float _Percent);
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
 		void PlayDeath();
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void DeathEnded();
 
 	UPROPERTY(BlueprintAssignable, Category = "Function")
 		FRifleDelegate OnActionEnded;
+
+	UPROPERTY(BlueprintAssignable, Category = "Function")
+		FRifleDelegate OnDeathEnded;
 	
 protected:
 	void NativeUpdateAnimation(float DeltaSeconds) override;
@@ -43,6 +52,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		int DeathIndex;
+
+	UPROPERTY()
+		FTimerHandle DeathTimer;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		class UAnimSequence* AttackAnim;

@@ -51,26 +51,23 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void Attacks();
 
+	UFUNCTION(BlueprintCallable)
+		void PlayDamage(float _Percent);
+
+	UFUNCTION(BlueprintCallable)
+		void PlayAttack();
+
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void SpecialAttack();
 
-	UFUNCTION(BlueprintCallable, Category = "Health")
-		void Damaged();
-
-	UFUNCTION(BlueprintCallable, Category = "Anim")
-		void PlayAttack(); 
-
 	UFUNCTION(BlueprintCallable, Category = "Anim")
 		void PlayDeath();
-
-	UFUNCTION(BlueprintCallable, Category = "Anim")
-		void AnimEnded();
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void OwnerDied();
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-		virtual void HandleDeath();
+		virtual void HandleDeath(float _Percent);
 
 	UFUNCTION(BlueprintCallable, Category = "Weapons")
 		void SwapWeapons();
@@ -79,7 +76,7 @@ public:
 		virtual void SetReferences();
 
 	UFUNCTION(BlueprintCallable, Category = "References")
-		void BindWeapAndAnimEvents();
+		virtual void BindWeapAndAnimEvents();
 
 	bool CanPickupHealth() const override;
 	bool ShouldPickupHealth() const override;

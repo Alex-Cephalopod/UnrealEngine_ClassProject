@@ -30,6 +30,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UImage* CrosshairImage;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+		class UProgressBar* HealthBar;
+
 	UPROPERTY(BlueprintReadOnly)
 		class UMaterialInstanceDynamic* DynamicMaterial;
 
@@ -62,4 +65,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		bool GetEnd(FVector& _Hit, FVector& _EndPoint) const;
+
+	UFUNCTION(BlueprintCallable)
+		void SetHealth(float _Percent);
 };

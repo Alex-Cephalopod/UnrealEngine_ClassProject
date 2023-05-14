@@ -39,7 +39,7 @@ void ABaseCharacter::BeginPlay()
 
 	BindWeapAndAnimEvents();
 
-	HealthComponent->OnDeath.AddDynamic(this, &ABaseCharacter::HandleDeath);
+	HealthComponent->OnDeathHealth.AddDynamic(this, &ABaseCharacter::HandleDeath);
 }
 
 // Called every frame
@@ -59,14 +59,9 @@ void ABaseCharacter::Attacks()
 	Weapon->Attacks();
 }
 
-void ABaseCharacter::SpecialAttack()
+void ABaseCharacter::PlayDamage(float _Percent)
 {
-	Weapon->SpecialAttack();
-}
-
-void ABaseCharacter::Damaged() 
-{
-	AnimInstance->PlayDamaged();
+	AnimInstance->PlayDamageWithFloat(_Percent);
 }
 
 void ABaseCharacter::PlayAttack()
@@ -74,14 +69,14 @@ void ABaseCharacter::PlayAttack()
 	AnimInstance->PlayAttack();
 }
 
+void ABaseCharacter::SpecialAttack()
+{
+	Weapon->SpecialAttack();
+}
+
 void ABaseCharacter::PlayDeath()
 {
 	AnimInstance->PlayDeath();
-}
-
-void ABaseCharacter::AnimEnded()
-{
-	Weapon->AnimationEnded();
 }
 
 void ABaseCharacter::OwnerDied()
@@ -89,7 +84,7 @@ void ABaseCharacter::OwnerDied()
 	Weapon->OwnerDied();
 }
 
-void ABaseCharacter::HandleDeath()
+void ABaseCharacter::HandleDeath(float _Percent)
 {
 	GetCharacterMovement()->DisableMovement();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -127,19 +122,19 @@ void ABaseCharacter::SetReferences()
 
 void ABaseCharacter::BindWeapAndAnimEvents()
 {
-	if (!HealthComponent->OnDamaged.IsBound())
+	if (!HealthComponent->OnDamageHealth.IsBound())
 	{
-		HealthComponent->OnDamaged.AddDynamic(this, &ABaseCharacter::Damaged);
+		HealthComponent->OnDamageHealth.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayDamageWithFloat);
 	}
 
 	if (!Weapon->OnAttack.IsBound()) 
 	{
-		Weapon->OnAttack.AddDynamic(this, &ABaseCharacter::PlayAttack);
+		Weapon->OnAttack.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayAttack);
 	}
 
 	if (!AnimInstance->OnActionEnded.IsBound()) 
 	{
-		AnimInstance->OnActionEnded.AddDynamic(this, &ABaseCharacter::AnimEnded);
+		AnimInstance->OnActionEnded.AddDynamic(Weapon, &ABaseWeapon::AnimationEnded);
 	}
 }
 
