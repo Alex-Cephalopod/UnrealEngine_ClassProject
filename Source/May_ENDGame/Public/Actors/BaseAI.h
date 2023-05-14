@@ -25,4 +25,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void BindWeapAndAnimEvents() override;
+
+	UFUNCTION()
+		void WhenPlayerDies();
 };

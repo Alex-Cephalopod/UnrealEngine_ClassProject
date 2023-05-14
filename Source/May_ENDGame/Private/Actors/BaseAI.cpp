@@ -23,3 +23,8 @@ void ABaseAI::BindWeapAndAnimEvents()
 	if (!AnimInstance->OnDeathEnded.IsBound())
 		AnimInstance->OnDeathEnded.AddDynamic(this, &ABaseAI::K2_DestroyActor);
 }
+
+void ABaseAI::WhenPlayerDies()
+{
+	SetActorTickEnabled(false);
+}

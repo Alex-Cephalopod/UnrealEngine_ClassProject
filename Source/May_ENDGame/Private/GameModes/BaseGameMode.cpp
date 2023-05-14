@@ -9,17 +9,19 @@ void ABaseGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//Get All Actors of Class
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AIClass, FoundActors);
 
-	//write a for each loop to bind RemoveEnemy() to OnDestroyed
 	for (AActor* Actor : FoundActors)
 	{
 		Actor->OnDestroyed.AddDynamic(this, &ABaseGameMode::RemoveEnemy);
 	}
 
 	CurrentEnemyCount = FoundActors.Num();
+
+	APawn* ActivePlayer = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+	ActivePlayer->OnDestroyed.AddDynamic(this, &ABaseGameMode::RemovePlayer);
 
 }
 
@@ -33,7 +35,20 @@ void ABaseGameMode::RemoveEnemy(AActor* DestroyedActor)
 	}
 	else
 	{
-		//print to screen debug message "You Win!"
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Win!"));
+	}
+}
+
+void ABaseGameMode::RemovePlayer(AActor* DestroyedActor)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You Lose!"));
+
+	TArray<AActor*> FoundActors; 
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AIClass, FoundActors); 
+	ABaseAI* AI = nullptr;
+	for (AActor* Actor : FoundActors)
+	{
+		AI = Cast<ABaseAI>(Actor); 
+		AI->WhenPlayerDies();
 	}
 }

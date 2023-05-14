@@ -30,4 +30,7 @@ public:
 
 	UFUNCTION()
 		void RemoveEnemy(AActor* DestroyedActor);
+
+	UFUNCTION()
+		void RemovePlayer(AActor* DestroyedActor);
 };

@@ -35,6 +35,8 @@ public:
 
 	virtual FRotator GetBaseAimRotation() const override;
 
+	void BindWeapAndAnimEvents() override;
+
 protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")

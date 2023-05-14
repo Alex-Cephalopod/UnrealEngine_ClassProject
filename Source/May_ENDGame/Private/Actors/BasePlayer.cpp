@@ -79,6 +79,14 @@ FRotator ABasePlayer::GetBaseAimRotation() const
 	return Destination.Rotation(); 
 }
 
+void ABasePlayer::BindWeapAndAnimEvents()
+{
+	Super::BindWeapAndAnimEvents();
+
+	if (!AnimInstance->OnDeathEnded.IsBound())
+		AnimInstance->OnDeathEnded.AddDynamic(this, &ABasePlayer::K2_DestroyActor);
+}
+
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
