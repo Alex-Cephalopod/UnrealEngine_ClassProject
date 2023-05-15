@@ -117,9 +117,10 @@ void ABaseCharacter::SetReferences()
 
 void ABaseCharacter::BindWeapAndAnimEvents()
 {
-	if (!HealthComponent->OnDamageNoParam.IsBound())
+
+	if (!HealthComponent->OnDamageHealth.IsBound())
 	{
-		HealthComponent->OnDamageNoParam.AddDynamic(this, &ABaseCharacter::PlayDamage);
+		HealthComponent->OnDamageHealth.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayDamageWithFloat);
 	}
 
 	if (!Weapon->OnAttack.IsBound()) 

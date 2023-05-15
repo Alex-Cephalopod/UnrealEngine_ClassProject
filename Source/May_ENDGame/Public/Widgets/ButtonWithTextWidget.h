@@ -31,10 +31,15 @@ public:
 
 protected:
 
-	virtual void NativePreConstruct() override; 
+	virtual void NativeConstruct() override;
 
 public:
 
 	UFUNCTION()
 		void OnButtonClicked();
+
+
+#if WITH_EDITOR
+	void OnDesignerChanged(const FDesignerChangedEventArgs& EventArgs) override;
+#endif
 };

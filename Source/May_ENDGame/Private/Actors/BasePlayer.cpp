@@ -13,7 +13,6 @@
 
 ABasePlayer::ABasePlayer()
 {
-	
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
 	
@@ -23,13 +22,16 @@ ABasePlayer::ABasePlayer()
 	
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
-
 }
 
 void ABasePlayer::BeginPlay()
 {
 	Super::BeginPlay();
 	HUDWidget->AddToViewport();
+
+	HealthComponent->OnDamageHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
+	HealthComponent->OnDeathHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
+	HealthComponent->OnHealed.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
 }
 
 bool ABasePlayer::CanPickupHealth() const
@@ -50,14 +52,6 @@ void ABasePlayer::SetReferences()
 	{
 		HUDWidget = CreateWidget<UHUDWidget>(GetWorld(), HUDWidgetClass);
 	}
-	if (!HealthComponent->OnDamageHealth.IsBound())
-		HealthComponent->OnDamageHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
-
-	if (!HealthComponent->OnDeathHealth.IsBound())
-		HealthComponent->OnDeathHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
-
-	if (!HealthComponent->OnHealed.IsBound())
-		HealthComponent->OnHealed.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
 }
 
 FRotator ABasePlayer::GetBaseAimRotation() const

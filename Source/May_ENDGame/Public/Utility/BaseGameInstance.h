@@ -22,12 +22,28 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 		int FirstLevel;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
+		int MainMenu;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
+		int CurrentLevel;
+
 protected:
+
+private:
+
+	void LoadLevelSafe(int MapIndex);
 
 public:
 
 	UFUNCTION(BlueprintCallable)
-		void LoadLevel();
+		void LoadFirstLevel();
+
+	UFUNCTION()
+		void LoadMainMenu();
+
+	UFUNCTION()
+		void LoadCurrentLevel();
 
 	UFUNCTION(BlueprintCallable)
 		void QuitGame();

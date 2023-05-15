@@ -32,5 +32,5 @@ void UMainMenuWidget::OnQuitButtonClicked()
 
 void UMainMenuWidget::OnStartButtonClicked()
 {
-	GameInstance->LoadLevel();
+	GameInstance->LoadFirstLevel();
 }

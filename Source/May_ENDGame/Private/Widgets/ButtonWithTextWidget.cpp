@@ -5,9 +5,9 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 
-void UButtonWithTextWidget::NativePreConstruct()
+void UButtonWithTextWidget::NativeConstruct()
 {
-	Super::NativePreConstruct();
+	Super::NativeConstruct();
 
 	Information->SetText(Text);
 
@@ -19,4 +19,11 @@ void UButtonWithTextWidget::OnButtonClicked()
 	OnClicked.Broadcast();
 }
 
-
+#if WITH_EDITOR
+void UButtonWithTextWidget::OnDesignerChanged(const FDesignerChangedEventArgs& EventArgs)
+{
+	Super::OnDesignerChanged(EventArgs);
+	if (Information)
+		Information->SetText(Text);
+}
+#endif
