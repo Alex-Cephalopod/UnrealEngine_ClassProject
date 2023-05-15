@@ -21,6 +21,9 @@ public:
 		float MaxHealth;
 
 	UPROPERTY(BlueprintAssignable, Category = "Health")
+		FHealthComponentDelegate OnDamageNoParam;
+
+	UPROPERTY(BlueprintAssignable, Category = "Health")
 		FHealthComponentDelegateOneParam OnDamageHealth;
 
 	UPROPERTY(BlueprintAssignable, Category = "Health")

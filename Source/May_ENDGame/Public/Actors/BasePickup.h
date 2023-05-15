@@ -17,6 +17,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 		class UBoxComponent* CollisionBox;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup Properties")
+		UParticleSystemComponent* ParticleSystem;
+
 	UFUNCTION(BlueprintCallable, Category = "Pickup")
 		virtual bool CanPickUp(AActor* OtherActor) const;
 

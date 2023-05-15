@@ -10,7 +10,7 @@
 
 ABaseWeapon::ABaseWeapon()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 	Animating = false;
 

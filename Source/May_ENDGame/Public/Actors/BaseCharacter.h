@@ -52,10 +52,7 @@ public:
 		void Attacks();
 
 	UFUNCTION(BlueprintCallable)
-		void PlayDamage(float _Percent);
-
-	UFUNCTION(BlueprintCallable)
-		void PlayAttack();
+		void PlayDamage();
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 		void SpecialAttack();

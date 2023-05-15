@@ -59,14 +59,9 @@ void ABaseCharacter::Attacks()
 	Weapon->Attacks();
 }
 
-void ABaseCharacter::PlayDamage(float _Percent)
+void ABaseCharacter::PlayDamage()
 {
-	AnimInstance->PlayDamageWithFloat(_Percent);
-}
-
-void ABaseCharacter::PlayAttack()
-{
-	AnimInstance->PlayAttack();
+	AnimInstance->PlayDamaged();
 }
 
 void ABaseCharacter::SpecialAttack()
@@ -122,9 +117,9 @@ void ABaseCharacter::SetReferences()
 
 void ABaseCharacter::BindWeapAndAnimEvents()
 {
-	if (!HealthComponent->OnDamageHealth.IsBound())
+	if (!HealthComponent->OnDamageNoParam.IsBound())
 	{
-		HealthComponent->OnDamageHealth.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayDamageWithFloat);
+		HealthComponent->OnDamageNoParam.AddDynamic(this, &ABaseCharacter::PlayDamage);
 	}
 
 	if (!Weapon->OnAttack.IsBound()) 

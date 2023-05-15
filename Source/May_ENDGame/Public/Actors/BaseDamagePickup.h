@@ -18,9 +18,6 @@ public:
 	ABaseDamagePickup();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
-		class UParticleSystemComponent* ParticleSystem;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 		float DamageValue;
 
 protected:

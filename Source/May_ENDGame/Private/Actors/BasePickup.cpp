@@ -4,6 +4,7 @@
 #include "Actors/BasePickup.h"
 #include "Components/BoxComponent.h"
 #include "Components/PrimitiveComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 
 
 // Sets default values
@@ -16,6 +17,9 @@ ABasePickup::ABasePickup()
 	CollisionBox->SetCollisionProfileName("OverlapAllDynamic"); 
 	CollisionBox->SetGenerateOverlapEvents(true); 
 	SetRootComponent(CollisionBox);
+
+	ParticleSystem = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystem"));
+	ParticleSystem->SetupAttachment(CollisionBox);
 }
 
 // Called when the game starts or when spawned

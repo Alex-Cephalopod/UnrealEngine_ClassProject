@@ -18,9 +18,6 @@ public:
 	ABaseHealthPickup();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup Properties")
-		UParticleSystemComponent* ParticleSystem;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup Properties")
 		float HealthValue;
 
 protected:

@@ -36,6 +36,7 @@ void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, co
 		if (Damage > 0)
 		{
 			OnDamageHealth.Broadcast(CurrentHealth/MaxHealth);
+			OnDamageNoParam.Broadcast();
 			UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
 		}
 		else
