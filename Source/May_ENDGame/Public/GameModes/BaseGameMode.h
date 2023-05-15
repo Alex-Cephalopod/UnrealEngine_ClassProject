@@ -19,12 +19,23 @@ public:
 	UPROPERTY()
 		int32 CurrentEnemyCount;
 
+	UPROPERTY()
+		APlayerController* ActivePlayerController;
+
+	UPROPERTY()
+		class ABasePlayer* ActivePlayer;
+
+	UPROPERTY()
+		class UGameResultsWidget* ResultsWidget;
+
 protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere)
-		//make a TSubclassOf AActors
 		TSubclassOf<class AActor> AIClass;
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UGameResultsWidget> GameResultsWidgetClass;
 	
 public:
 

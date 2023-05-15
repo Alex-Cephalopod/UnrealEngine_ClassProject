@@ -4,6 +4,9 @@
 #include "GameModes/BaseGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include "Actors/BaseAI.h"
+#include "Blueprint/UserWidget.h"
+#include "Widgets/GameResultsWidget.h"
+#include "Actors/BasePlayer.h"
 
 void ABaseGameMode::BeginPlay()
 {
@@ -19,9 +22,15 @@ void ABaseGameMode::BeginPlay()
 
 	CurrentEnemyCount = FoundActors.Num();
 
-	APawn* ActivePlayer = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	APawn* ActivePlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+	ActivePlayer = Cast<ABasePlayer>(ActivePlayerPawn);
 
 	ActivePlayer->OnDestroyed.AddDynamic(this, &ABaseGameMode::RemovePlayer);
+
+	ActivePlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	ResultsWidget = CreateWidget<UGameResultsWidget>(ActivePlayerController, GameResultsWidgetClass);
 
 }
 
@@ -35,13 +44,19 @@ void ABaseGameMode::RemoveEnemy(AActor* DestroyedActor)
 	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("You Win!"));
+		ResultsWidget->SetWin();
+		ResultsWidget->AddToViewport();
+
+		ActivePlayer->DisableInput(ActivePlayerController);
+		ActivePlayer->OnDestroyed.RemoveDynamic(this, &ABaseGameMode::RemovePlayer);
+
+		ActivePlayer->RemoveUI();
 	}
 }
 
 void ABaseGameMode::RemovePlayer(AActor* DestroyedActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("You Lose!"));
+	ResultsWidget->AddToViewport();
 
 	TArray<AActor*> FoundActors; 
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AIClass, FoundActors); 
@@ -51,4 +66,8 @@ void ABaseGameMode::RemovePlayer(AActor* DestroyedActor)
 		AI = Cast<ABaseAI>(Actor); 
 		AI->WhenPlayerDies();
 	}
+
+	ActivePlayerController->SetShowMouseCursor(true);
+	ActivePlayerController->SetInputMode(FInputModeUIOnly());
+	ActivePlayer->RemoveUI();
 }

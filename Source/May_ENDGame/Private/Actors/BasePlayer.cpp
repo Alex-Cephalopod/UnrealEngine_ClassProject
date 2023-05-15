@@ -81,6 +81,11 @@ void ABasePlayer::BindWeapAndAnimEvents()
 		AnimInstance->OnDeathEnded.AddDynamic(this, &ABasePlayer::K2_DestroyActor);
 }
 
+void ABasePlayer::RemoveUI()
+{
+	HUDWidget->RemoveFromParent();
+}
+
 void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);

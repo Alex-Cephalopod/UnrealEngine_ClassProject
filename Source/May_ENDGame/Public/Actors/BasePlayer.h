@@ -37,6 +37,9 @@ public:
 
 	void BindWeapAndAnimEvents() override;
 
+	UFUNCTION()
+		void RemoveUI();
+
 protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")

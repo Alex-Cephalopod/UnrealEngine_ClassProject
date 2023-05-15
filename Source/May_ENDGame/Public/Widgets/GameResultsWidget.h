@@ -35,7 +35,6 @@ protected:
 	UPROPERTY()
 		class UBaseGameInstance* GameInstance;
 
-	//create an f timer handle
 	UPROPERTY()
 		FTimerHandle TimerHandle;
 
