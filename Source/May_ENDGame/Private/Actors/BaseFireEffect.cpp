@@ -17,11 +17,11 @@ ABaseFireEffect::ABaseFireEffect()
 }
 
 // Called when the game starts or when spawned
-void ABaseFireEffect::BeginPlay()
-{
-	//Super::BeginPlay();
-	
-}
+//void ABaseFireEffect::BeginPlay()
+//{
+//	Super::BeginPlay();
+//	
+//}
 
 // Called every frame
 void ABaseFireEffect::Tick(float DeltaTime)

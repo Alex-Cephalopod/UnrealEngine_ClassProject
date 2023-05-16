@@ -57,7 +57,6 @@ void ABaseCharacter::BeginPlay()
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//EffectsComponent->StartEffects(EEffects::EE_Burning, this);
 }
 
 // Called to bind functionality to input

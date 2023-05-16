@@ -16,13 +16,13 @@ UBaseEffectsComponent::UBaseEffectsComponent()
 
 
 // Called when the game starts
-void UBaseEffectsComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
+//void UBaseEffectsComponent::BeginPlay()
+//{
+//	Super::BeginPlay();
+//
+//	// ...
+//	
+//}
 
 
 // Called every frame
