@@ -22,6 +22,9 @@ public:
 
 protected:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
+		TSubclassOf<UDamageType> DamageTypeClass;
+
 public:
 
 	virtual void HandlePickup(AActor* OtherActor, const FHitResult& SweepResult) override;

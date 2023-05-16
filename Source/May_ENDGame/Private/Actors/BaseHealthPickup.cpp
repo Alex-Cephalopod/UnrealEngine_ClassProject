@@ -46,3 +46,9 @@ bool ABaseHealthPickup::ShouldPickUp(AActor* OtherActor) const
 		return false;
 	}
 }
+
+void ABaseHealthPickup::HandleNoPickup()
+{
+	//call play sound at location
+	UGameplayStatics::PlaySoundAtLocation(this, InvalidSound, GetActorLocation());
+}

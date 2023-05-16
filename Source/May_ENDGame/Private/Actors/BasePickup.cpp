@@ -14,7 +14,7 @@ ABasePickup::ABasePickup()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
-	CollisionBox->SetCollisionProfileName("OverlapAllDynamic"); 
+	CollisionBox->SetCollisionProfileName("Pickup");
 	CollisionBox->SetGenerateOverlapEvents(true); 
 	SetRootComponent(CollisionBox);
 
@@ -48,6 +48,10 @@ void ABasePickup::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
 			HandlePickup(OtherActor, SweepResult);
 			PostPickup();
 		}
+		else
+		{
+			HandleNoPickup();
+		}
 	}
 }
 
@@ -59,5 +63,10 @@ void ABasePickup::HandlePickup(AActor* OtherActor, const FHitResult& SweepResult
 void ABasePickup::PostPickup()
 {
 	Destroy();
+}
+
+void ABasePickup::HandleNoPickup()
+{
+
 }
 

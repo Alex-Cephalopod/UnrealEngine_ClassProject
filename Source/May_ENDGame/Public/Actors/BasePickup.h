@@ -31,15 +31,18 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	UFUNCTION()
+	UFUNCTION(Category = "Function")
 		virtual void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
 						class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 						bool bFromSweep, const FHitResult& SweepResult);
 
-	UFUNCTION(Category = "Pickup")
+	UFUNCTION(Category = "Function")
 		virtual void HandlePickup(AActor* OtherActor, const FHitResult& SweepResult);
 
-	UFUNCTION(BlueprintCallable, Category = "Pickup")
+	UFUNCTION(BlueprintCallable, Category = "Function")
 		virtual void PostPickup();
+
+	UFUNCTION(Category = "Function")
+		virtual void HandleNoPickup();
 
 };

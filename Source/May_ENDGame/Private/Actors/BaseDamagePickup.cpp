@@ -19,7 +19,7 @@ ABaseDamagePickup::ABaseDamagePickup()
 
 void ABaseDamagePickup::HandlePickup(AActor* OtherActor, const FHitResult& SweepResult)
 {
-	UGameplayStatics::ApplyDamage(OtherActor, DamageValue, nullptr , this, nullptr);
+	UGameplayStatics::ApplyDamage(OtherActor, DamageValue, nullptr , this, DamageTypeClass);
 }
 
 void ABaseDamagePickup::PostPickup()

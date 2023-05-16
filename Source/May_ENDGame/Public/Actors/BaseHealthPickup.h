@@ -20,6 +20,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup Properties")
 		float HealthValue;
 
+	UPROPERTY(EditAnywhere, Category = "Sound")
+		class USoundBase* InvalidSound;
+
 protected:
 
 public:
@@ -29,4 +32,6 @@ public:
 	bool CanPickUp(AActor* OtherActor) const override;
 
 	bool ShouldPickUp(AActor* OtherActor) const override;
+
+	void HandleNoPickup() override;
 };

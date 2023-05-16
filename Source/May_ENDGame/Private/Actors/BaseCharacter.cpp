@@ -22,6 +22,8 @@ ABaseCharacter::ABaseCharacter()
 	GetMesh()->SetWorldRotation(FRotator(0.0f, -90.0f, 0.0f));
 	GetMesh()->SetWorldLocation(FVector(0.0f, 0.0f, -90.0f));
 	GetMesh()->SetGenerateOverlapEvents(true);
+	GetMesh()->SetCollisionProfileName("Custom");
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
 
 	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
 	WeaponChild->SetupAttachment(this->GetMesh(), "WeaponTransform");
