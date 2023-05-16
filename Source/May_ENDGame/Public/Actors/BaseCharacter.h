@@ -21,6 +21,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		class UBaseHealthComponent* HealthComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		class UBaseEffectsComponent* EffectsComponent;
+
 	UPROPERTY()
 		class ABaseWeapon* Weapon;
 

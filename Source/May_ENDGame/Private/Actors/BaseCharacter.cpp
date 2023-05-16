@@ -11,6 +11,8 @@
 #include "Components/BaseHealthComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/BaseEffectsComponent.h"
+#include "Actors/BaseFireEffect.h"
 
 
 // Sets default values
@@ -28,7 +30,12 @@ ABaseCharacter::ABaseCharacter()
 	WeaponChild = CreateDefaultSubobject<UChildActorComponent>(TEXT("Weapon"));
 	WeaponChild->SetupAttachment(this->GetMesh(), "WeaponTransform");
 
+	EffectsComponent = CreateDefaultSubobject<UBaseEffectsComponent>(TEXT("EffectsComponent"));
+	EffectsComponent->SetupAttachment(GetMesh());
+	EffectsComponent->SetRelativeLocation(FVector(0.f, 0.f, 140.f));
+
 	HealthComponent = CreateDefaultSubobject<UBaseHealthComponent>(TEXT("HealthComponent"));
+
 
 }
 
@@ -42,12 +49,15 @@ void ABaseCharacter::BeginPlay()
 	BindWeapAndAnimEvents();
 
 	HealthComponent->OnDeathHealth.AddDynamic(this, &ABaseCharacter::HandleDeath);
+
+	EffectsComponent->StartEffects(EEffects::EE_Burning, this);
 }
 
 // Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	//EffectsComponent->StartEffects(EEffects::EE_Burning, this);
 }
 
 // Called to bind functionality to input
