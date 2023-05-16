@@ -50,7 +50,7 @@ void ABasePlayer::SetReferences()
 	PlayerController = Cast<APlayerController>(GetController());
 	if (!HUDWidget)
 	{
-		HUDWidget = CreateWidget<UHUDWidget>(GetWorld(), HUDWidgetClass);
+		HUDWidget = CreateWidget<UHUDWidget>(PlayerController, HUDWidgetClass);
 	}
 }
 
