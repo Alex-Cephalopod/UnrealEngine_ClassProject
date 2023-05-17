@@ -23,6 +23,7 @@ void ABaseWeapon::BeginPlay()
 	Super::BeginPlay();
 	BulletClass = ABaseBullet::StaticClass(); 
 	PawnOwner = Cast<APawn>(GetParentActor()); 
+	ReloadAmmo();
 }
 
 ABaseBullet* ABaseWeapon::Attacks()
@@ -39,6 +40,8 @@ ABaseBullet* ABaseWeapon::Attacks()
 
 		OnAttack.Broadcast();
 
+		UseAmmo();
+
 		return Bullet;
 	}
 	else
@@ -54,7 +57,7 @@ void ABaseWeapon::SpecialAttack()
 
 bool ABaseWeapon::CanShoot() const
 {
-	return !Animating && !Dead;
+	return !Animating && !Dead && (CurrentAmmo > 0.f);
 }
 
 void ABaseWeapon::AnimationEnded()
@@ -65,4 +68,16 @@ void ABaseWeapon::AnimationEnded()
 void ABaseWeapon::OwnerDied()
 {
 	Dead = true;
+}
+
+void ABaseWeapon::ReloadAmmo()
+{
+	CurrentAmmo = MaxAmmo;
+}
+
+void ABaseWeapon::UseAmmo()
+{
+	CurrentAmmo -= 1.f;
+	CurrentAmmo = FMath::Clamp(CurrentAmmo, 0.f, MaxAmmo);
+	OnAmmoUpdate.Broadcast(CurrentAmmo, MaxAmmo);
 }

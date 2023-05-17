@@ -10,6 +10,7 @@
 #include "BaseWeapon.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE (FWeaponDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FWeaponDelegateTwoParams, float , _CurrentAmmo, float, _MaxAmmo);
 
 USTRUCT(BlueprintType)
 struct FWeaponSyncInfo {
@@ -40,8 +41,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool Dead;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float CurrentAmmo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float MaxAmmo;
+
 	UPROPERTY(BlueprintAssignable, Category = "Weapon")
 		FWeaponDelegate OnAttack;
+
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+		FWeaponDelegateTwoParams OnAmmoUpdate;
 
 	UPROPERTY()
 		TArray<ABaseBullet*> Bullets;
@@ -74,5 +84,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void OwnerDied();
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void ReloadAmmo();
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void UseAmmo();
 
 };

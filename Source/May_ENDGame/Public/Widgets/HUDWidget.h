@@ -28,7 +28,16 @@ private:
 protected:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+		class UTextBlock* AmmoText;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+		class UTextBlock* MaxAmmoText;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UImage* CrosshairImage;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+		class UImage* Rifleicon;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UProgressBar* HealthBar;
@@ -68,4 +77,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void SetHealth(float _Percent);
+
+	UFUNCTION(BlueprintCallable)
+		void SetAmmo(float _Current, float _Max);
 };

@@ -2,4 +2,20 @@
 
 
 #include "Utility/BaseDamageTypeFire.h"
+#include "Components/BaseEffectsComponent.h"
 
+UBaseDamageTypeFire::UBaseDamageTypeFire()
+{
+	EffectClass = UBaseEffectsComponent::StaticClass();
+}
+
+void UBaseDamageTypeFire::StartEffect(AActor* DamagedActor, AActor* DamageCauser) const
+{
+	UActorComponent* ActorsComponent = DamagedActor->GetComponentByClass(EffectClass);
+
+	if (ActorsComponent)
+	{
+		UBaseEffectsComponent* BaseEffectsComponent = Cast<UBaseEffectsComponent>(ActorsComponent);
+		BaseEffectsComponent->StartEffects(EEffects::EE_Burning, DamageCauser);
+	}
+}

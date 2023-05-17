@@ -79,6 +79,9 @@ void ABasePlayer::BindWeapAndAnimEvents()
 
 	if (!AnimInstance->OnDeathEnded.IsBound())
 		AnimInstance->OnDeathEnded.AddDynamic(this, &ABasePlayer::K2_DestroyActor);
+
+	if (!Weapon->OnAmmoUpdate.IsBound())
+		Weapon->OnAmmoUpdate.AddDynamic(HUDWidget, &UHUDWidget::SetAmmo);
 }
 
 void ABasePlayer::RemoveUI()

@@ -6,6 +6,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Blueprint/SlateBlueprintLibrary.h"
 #include "Components/ProgressBar.h"
+#include "Components/TextBlock.h"
 
 void UHUDWidget::NativeConstruct()
 {
@@ -92,4 +93,10 @@ bool UHUDWidget::GetEnd(FVector& _Hit, FVector& _EndPoint) const
 void UHUDWidget::SetHealth(float _Percent)
 {
 	HealthBar->SetPercent(_Percent);
+}
+
+void UHUDWidget::SetAmmo(float _Current, float _Max)
+{
+	AmmoText->SetText(FText::FromString(FString::FromInt(_Current))); 
+	MaxAmmoText->SetText(FText::FromString(FString::FromInt(_Max))); 
 }
