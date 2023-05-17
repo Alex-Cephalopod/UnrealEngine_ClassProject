@@ -53,7 +53,16 @@ void UBaseRifleAnimInstance::PlayAttack()
 
 void UBaseRifleAnimInstance::PlayDamaged_Implementation()
 {
-	PlaySlotAnimationAsDynamicMontage(DamagedAnim, HurtSlot);
+
+	//call the IsPlayingSlotAnimation function to check if the animation is playing
+	if (IsPlayingSlotAnimation(DamagedAnim, HurtSlot))
+	{
+		
+	}
+	else
+	{
+		PlaySlotAnimationAsDynamicMontage(DamagedAnim, HurtSlot);
+	}
 }
 
 void UBaseRifleAnimInstance::PlayDamageWithFloat(float _Percent)

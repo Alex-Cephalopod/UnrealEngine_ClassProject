@@ -50,7 +50,7 @@ void ABaseCharacter::BeginPlay()
 
 	HealthComponent->OnDeathHealth.AddDynamic(this, &ABaseCharacter::HandleDeath);
 
-	EffectsComponent->StartEffects(EEffects::EE_Burning, this);
+	/*EffectsComponent->StartEffects(EEffects::EE_Burning, this);*/
 }
 
 // Called every frame
