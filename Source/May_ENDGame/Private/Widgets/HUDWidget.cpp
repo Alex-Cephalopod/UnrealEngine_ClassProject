@@ -7,6 +7,7 @@
 #include "Blueprint/SlateBlueprintLibrary.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
+#include "Components/WidgetSwitcher.h"
 
 void UHUDWidget::NativeConstruct()
 {
@@ -16,6 +17,11 @@ void UHUDWidget::NativeConstruct()
 	CrosshairImage->SetBrushFromMaterial(DynamicMaterial);
 
 	SetColor(SafeColor);
+
+	DynamicMaterials.Add(DynamicMaterial);
+	DynamicMaterials.Add(CrosshairImage_Launcher->GetDynamicMaterial());
+
+	CrosshairImage_Launcher->SetBrushFromMaterial(CrosshairImage_Launcher->GetDynamicMaterial());
 
 }
 
@@ -99,4 +105,21 @@ void UHUDWidget::SetAmmo(float _Current, float _Max)
 {
 	AmmoText->SetText(FText::FromString(FString::FromInt(_Current))); 
 	MaxAmmoText->SetText(FText::FromString(FString::FromInt(_Max))); 
+}
+
+void UHUDWidget::SetWeaponIndex(int32 _Index)
+{
+	CrosshairSwitcher->SetActiveWidgetIndex(_Index);
+
+	IconSwitcher->SetActiveWidgetIndex(_Index);
+
+	//check if index is valid on the array
+	if (_Index >= 0 && _Index < DynamicMaterials.Num())
+	{
+		DynamicMaterial = DynamicMaterials[_Index];
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Invalid index"));
+	}
 }

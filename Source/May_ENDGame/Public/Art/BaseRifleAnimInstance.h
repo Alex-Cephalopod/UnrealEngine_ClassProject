@@ -35,8 +35,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void DeathEnded();
 
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void PlayReload();
+
 	UPROPERTY(BlueprintAssignable, Category = "Function")
 		FRifleDelegate OnActionEnded;
+
+	UPROPERTY(BlueprintAssignable, Category = "Function")
+		FRifleDelegate OnReloadWeapon;
 
 	UPROPERTY(BlueprintAssignable, Category = "Function")
 		FRifleDelegate OnDeathEnded;
@@ -66,6 +72,9 @@ protected:
 		class UAnimSequence* CurrentDeathAnim;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		class UAnimSequence* ReloadAnim;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		TArray<class UAnimSequence*> DeathAnims;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
@@ -76,6 +85,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		bool DebugDeath;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		bool DebugReload;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		FName ActionSlot = "Action";

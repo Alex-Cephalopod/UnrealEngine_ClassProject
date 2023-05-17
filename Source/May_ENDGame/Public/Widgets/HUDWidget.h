@@ -37,13 +37,22 @@ protected:
 		class UImage* CrosshairImage;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-		class UImage* Rifleicon;
+		class UImage* CrosshairImage_Launcher;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+		class UWidgetSwitcher* CrosshairSwitcher;
+
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+		class UWidgetSwitcher* IconSwitcher;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UProgressBar* HealthBar;
 
 	UPROPERTY(BlueprintReadOnly)
 		class UMaterialInstanceDynamic* DynamicMaterial;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		TArray<class UMaterialInstanceDynamic*> DynamicMaterials;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FLinearColor DangerColor;
@@ -80,4 +89,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void SetAmmo(float _Current, float _Max);
+
+	UFUNCTION(BlueprintCallable)
+		void SetWeaponIndex(int32 _Index);
 };

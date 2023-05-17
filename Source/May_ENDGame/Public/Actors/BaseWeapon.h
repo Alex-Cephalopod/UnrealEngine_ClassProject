@@ -18,6 +18,9 @@ struct FWeaponSyncInfo {
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TSubclassOf<class UBaseRifleAnimInstance> AnimInstance;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		int32 WeaponIndex;
 };
 
 UCLASS()
@@ -49,6 +52,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Weapon")
 		FWeaponDelegate OnAttack;
+
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+		FWeaponDelegate OnReloadAnim;
 
 	UPROPERTY(BlueprintAssignable, Category = "Weapon")
 		FWeaponDelegateTwoParams OnAmmoUpdate;
@@ -87,6 +93,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void ReloadAmmo();
+
+	UFUNCTION(BlueprintCallable, Category = "Function")
+		void RequestReload();
 
 	UFUNCTION(BlueprintCallable, Category = "Function")
 		void UseAmmo();

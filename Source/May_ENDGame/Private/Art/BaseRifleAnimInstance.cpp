@@ -8,6 +8,7 @@ UBaseRifleAnimInstance::UBaseRifleAnimInstance()
 	DebugAttack = false;
 	DebugDamaged = false;
 	DebugDeath = false;
+	DebugReload = false;
 	DeathIndex = -1;
 }
 
@@ -43,6 +44,11 @@ void UBaseRifleAnimInstance::PersonaUpdate_Implementation()
 	{
 		PlayDeath();
 		DebugDeath = false;
+	}
+	else if (DebugReload)
+	{
+		PlayReload();
+		DebugReload = false;
 	}
 }
 
@@ -81,4 +87,9 @@ void UBaseRifleAnimInstance::PlayDeath()
 void UBaseRifleAnimInstance::DeathEnded()
 {
 	OnDeathEnded.Broadcast();
+}
+
+void UBaseRifleAnimInstance::PlayReload()
+{
+	PlaySlotAnimationAsDynamicMontage(ReloadAnim, ActionSlot);
 }

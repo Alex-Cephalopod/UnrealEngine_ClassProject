@@ -73,6 +73,16 @@ void ABaseWeapon::OwnerDied()
 void ABaseWeapon::ReloadAmmo()
 {
 	CurrentAmmo = MaxAmmo;
+	OnAmmoUpdate.Broadcast(CurrentAmmo, MaxAmmo);
+}
+
+void ABaseWeapon::RequestReload()
+{
+	if (Animating == false)
+	{
+		Animating = true;
+		OnReloadAnim.Broadcast();
+	}
 }
 
 void ABaseWeapon::UseAmmo()

@@ -49,8 +49,6 @@ void ABaseCharacter::BeginPlay()
 	BindWeapAndAnimEvents();
 
 	HealthComponent->OnDeathHealth.AddDynamic(this, &ABaseCharacter::HandleDeath);
-
-	/*EffectsComponent->StartEffects(EEffects::EE_Burning, this);*/
 }
 
 // Called every frame
@@ -68,6 +66,11 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ABaseCharacter::Attacks()
 {
 	Weapon->Attacks();
+}
+
+void ABaseCharacter::Reload()
+{
+	Weapon->RequestReload();
 }
 
 void ABaseCharacter::PlayDamage()
@@ -103,15 +106,16 @@ void ABaseCharacter::SwapWeapons()
 	if (WeaponClass == RifleClass)
 	{
 		WeaponClass = LauncherClass;
-		SetReferences();
-		BindWeapAndAnimEvents();
 	}
 	else
 	{
 		WeaponClass = RifleClass;
-		SetReferences();
-		BindWeapAndAnimEvents();
 	}
+
+	SetReferences();
+	BindWeapAndAnimEvents();
+
+	Weapon->ReloadAmmo();
 }
 
 void ABaseCharacter::SetReferences()
@@ -142,6 +146,16 @@ void ABaseCharacter::BindWeapAndAnimEvents()
 	if (!AnimInstance->OnActionEnded.IsBound()) 
 	{
 		AnimInstance->OnActionEnded.AddDynamic(Weapon, &ABaseWeapon::AnimationEnded);
+	}
+
+	if (!Weapon->OnReloadAnim.IsBound())
+	{
+		Weapon->OnReloadAnim.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayReload);
+	}
+
+	if (!AnimInstance->OnReloadWeapon.IsBound())
+	{
+		AnimInstance->OnReloadWeapon.AddDynamic(Weapon, &ABaseWeapon::ReloadAmmo);
 	}
 }
 

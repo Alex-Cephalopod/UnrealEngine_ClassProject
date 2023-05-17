@@ -32,6 +32,8 @@ void ABasePlayer::BeginPlay()
 	HealthComponent->OnDamageHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
 	HealthComponent->OnDeathHealth.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
 	HealthComponent->OnHealed.AddDynamic(HUDWidget, &UHUDWidget::SetHealth);
+
+	Weapon->ReloadAmmo();
 }
 
 bool ABasePlayer::CanPickupHealth() const
@@ -51,6 +53,10 @@ void ABasePlayer::SetReferences()
 	if (!HUDWidget)
 	{
 		HUDWidget = CreateWidget<UHUDWidget>(PlayerController, HUDWidgetClass);
+	}
+	else
+	{
+		HUDWidget->SetWeaponIndex(Weapon->WeaponSync.WeaponIndex);
 	}
 }
 
@@ -103,6 +109,7 @@ void ABasePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("StandardAttack", IE_Pressed, this, &ABasePlayer::Attacks);
 	PlayerInputComponent->BindAction("SpecialAttack", IE_Pressed, this, &ABasePlayer::SpecialAttack);
 	PlayerInputComponent->BindAction("SwitchWeapon", IE_Pressed, this, &ABasePlayer::SwapWeapons);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ABasePlayer::Reload);
 
 }
 
