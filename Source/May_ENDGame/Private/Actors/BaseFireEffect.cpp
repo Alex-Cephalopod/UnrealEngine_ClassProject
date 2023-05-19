@@ -11,20 +11,12 @@ ABaseFireEffect::ABaseFireEffect()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//set the life span of the actor
 	InitialLifeSpan = 2.0f;
 
 	FireEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("FireEffect"));
 	SetRootComponent(FireEffect);
 
 }
-
-// Called when the game starts or when spawned
-//void ABaseFireEffect::BeginPlay()
-//{
-//	Super::BeginPlay();
-//	
-//}
 
 // Called every frame
 void ABaseFireEffect::Tick(float DeltaTime)
@@ -33,7 +25,6 @@ void ABaseFireEffect::Tick(float DeltaTime)
 
 	float DPS = FireDamage * DeltaTime;
 
-	//call the apply damage function
 	UGameplayStatics::ApplyDamage(GetAttachParentActor(), DPS, nullptr, GetOwner(), nullptr);
 
 }

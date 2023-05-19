@@ -14,17 +14,6 @@ UBaseEffectsComponent::UBaseEffectsComponent()
 	// ...
 }
 
-
-// Called when the game starts
-//void UBaseEffectsComponent::BeginPlay()
-//{
-//	Super::BeginPlay();
-//
-//	// ...
-//	
-//}
-
-
 // Called every frame
 void UBaseEffectsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -39,12 +28,10 @@ void UBaseEffectsComponent::StartEffects(EEffects EffectType, AActor* DamageCaus
 	{
 	case EEffects::EE_Burning:
 	{
-		//spawn actor
 		FActorSpawnParameters SpawnParams; 
 		SpawnParams.Owner = DamageCauser;
 		ABaseFireEffect* FireEffect = GetWorld()->SpawnActor<ABaseFireEffect>(FireEffectClass, GetComponentTransform(), SpawnParams);
 
-		//attach actor to actor
 		FireEffect->AttachToActor(GetOwner(), FAttachmentTransformRules::KeepWorldTransform);
 		break;
 	}

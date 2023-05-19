@@ -20,7 +20,6 @@ class MAY_ENDGAME_API IIBaseDamageType
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
 	UFUNCTION(BlueprintCallable)

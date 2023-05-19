@@ -59,13 +59,7 @@ void UBaseRifleAnimInstance::PlayAttack()
 
 void UBaseRifleAnimInstance::PlayDamaged_Implementation()
 {
-
-	//call the IsPlayingSlotAnimation function to check if the animation is playing
-	if (IsPlayingSlotAnimation(DamagedAnim, HurtSlot))
-	{
-		
-	}
-	else
+	if (!IsPlayingSlotAnimation(DamagedAnim, HurtSlot))
 	{
 		PlaySlotAnimationAsDynamicMontage(DamagedAnim, HurtSlot);
 	}

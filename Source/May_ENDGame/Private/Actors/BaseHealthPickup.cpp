@@ -49,6 +49,5 @@ bool ABaseHealthPickup::ShouldPickUp(AActor* OtherActor) const
 
 void ABaseHealthPickup::HandleNoPickup()
 {
-	//call play sound at location
 	UGameplayStatics::PlaySoundAtLocation(this, InvalidSound, GetActorLocation());
 }

@@ -31,11 +31,6 @@ void UBaseHealthComponent::InitHealth()
 
 void UBaseHealthComponent::DamageHappened(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-
-	//cast damage type to BaseDamageTypeFire
-	//if cast is successful, call StartEffects on BaseEffectsComponent
-	//if (DamageType->IsA(UBaseDamageTypeFire::StaticClass()))
-	//{
 	const UBaseDamageTypeFire* BaseDamageTypeFire = Cast<UBaseDamageTypeFire>(DamageType);
 	if (BaseDamageTypeFire)
 	{

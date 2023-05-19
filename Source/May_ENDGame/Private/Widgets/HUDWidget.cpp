@@ -113,7 +113,6 @@ void UHUDWidget::SetWeaponIndex(int32 _Index)
 
 	IconSwitcher->SetActiveWidgetIndex(_Index);
 
-	//check if index is valid on the array
 	if (_Index >= 0 && _Index < DynamicMaterials.Num())
 	{
 		DynamicMaterial = DynamicMaterials[_Index];

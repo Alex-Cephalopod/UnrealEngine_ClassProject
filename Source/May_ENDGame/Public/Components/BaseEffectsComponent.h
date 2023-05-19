@@ -24,9 +24,6 @@ public:
 	UBaseEffectsComponent();
 
 protected:
-	// Called when the game starts
-	/*virtual void BeginPlay() override;*/
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TSubclassOf<class ABaseFireEffect> FireEffectClass;
 
