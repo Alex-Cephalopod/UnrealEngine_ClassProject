@@ -4,8 +4,10 @@
 #include "Controllers/BaseBasicAIController.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Perception/AISenseConfig_Sight.h"
 #include "Perception/AISense_Sight.h"
 #include "Perception/AIPerceptionTypes.h"
+
 
 
 ABaseBasicAIController::ABaseBasicAIController()

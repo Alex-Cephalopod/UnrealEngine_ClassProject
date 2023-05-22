@@ -7,6 +7,8 @@
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Actors/BaseWeapon.h"
+#include "Perception/AIPerceptionSystem.h"
+#include "Perception/AISense_Sight.h"
 
 
 ABaseAI::ABaseAI()
@@ -24,6 +26,7 @@ void ABaseAI::BeginPlay()
 	}
 
 	Super::BeginPlay();
+
 }
 
 void ABaseAI::Tick(float DeltaTime)

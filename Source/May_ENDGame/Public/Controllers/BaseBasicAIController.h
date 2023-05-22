@@ -33,6 +33,5 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FName PlayerKey;
-
 	
 };
