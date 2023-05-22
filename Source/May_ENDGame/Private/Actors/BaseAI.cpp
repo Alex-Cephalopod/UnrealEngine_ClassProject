@@ -6,7 +6,7 @@
 
 ABaseAI::ABaseAI()
 {
-	PrimaryActorTick.bStartWithTickEnabled = true;
+	PrimaryActorTick.bStartWithTickEnabled = false;
 }
 
 void ABaseAI::Tick(float DeltaTime)

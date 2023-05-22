@@ -41,13 +41,8 @@ ABaseBullet* ABaseWeapon::Attacks()
 		OnAttack.Broadcast();
 
 		UseAmmo();
-
-		return Bullet;
 	}
-	else
-	{
-		return Bullet;
-	}
+	return Bullet;
 }
 
 void ABaseWeapon::SpecialAttack()

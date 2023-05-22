@@ -26,31 +26,29 @@ void ABaseGameMode::BeginPlay()
 
 	ActivePlayer = Cast<ABasePlayer>(ActivePlayerPawn);
 
-	ActivePlayer->OnDestroyed.AddDynamic(this, &ABaseGameMode::RemovePlayer);
+	if (ActivePlayer)
+	{
+		ActivePlayer->OnDestroyed.AddDynamic(this, &ABaseGameMode::RemovePlayer);
 
-	ActivePlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+		ActivePlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
-	ResultsWidget = CreateWidget<UGameResultsWidget>(ActivePlayerController, GameResultsWidgetClass);
-
+		ResultsWidget = CreateWidget<UGameResultsWidget>(ActivePlayerController, GameResultsWidgetClass);
+	}
 }
 
 void ABaseGameMode::RemoveEnemy(AActor* DestroyedActor)
 {
-	CurrentEnemyCount--;
+	--CurrentEnemyCount;
 
-	if (CurrentEnemyCount > 0)
+	if (CurrentEnemyCount <= 0)
 	{
+		ResultsWidget->SetWin(); 
+		ResultsWidget->AddToViewport(); 
 
-	}
-	else
-	{
-		ResultsWidget->SetWin();
-		ResultsWidget->AddToViewport();
+		ActivePlayer->DisableInput(ActivePlayerController); 
+		ActivePlayer->OnDestroyed.RemoveDynamic(this, &ABaseGameMode::RemovePlayer); 
 
-		ActivePlayer->DisableInput(ActivePlayerController);
-		ActivePlayer->OnDestroyed.RemoveDynamic(this, &ABaseGameMode::RemovePlayer);
-
-		ActivePlayer->RemoveUI();
+		ActivePlayer->RemoveUI(); 
 	}
 }
 
@@ -64,7 +62,10 @@ void ABaseGameMode::RemovePlayer(AActor* DestroyedActor)
 	for (AActor* Actor : FoundActors)
 	{
 		AI = Cast<ABaseAI>(Actor); 
-		AI->WhenPlayerDies();
+		if (AI)
+		{
+			AI->WhenPlayerDies();
+		}
 	}
 
 	ActivePlayerController->SetShowMouseCursor(true);

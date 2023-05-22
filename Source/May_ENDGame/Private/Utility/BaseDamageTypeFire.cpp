@@ -16,6 +16,7 @@ void UBaseDamageTypeFire::StartEffect(AActor* DamagedActor, AActor* DamageCauser
 	if (ActorsComponent)
 	{
 		UBaseEffectsComponent* BaseEffectsComponent = Cast<UBaseEffectsComponent>(ActorsComponent);
-		BaseEffectsComponent->StartEffects(EEffects::EE_Burning, DamageCauser);
+		if (BaseEffectsComponent)
+			BaseEffectsComponent->StartEffects(EEffects::EE_Burning, DamageCauser);
 	}
 }
