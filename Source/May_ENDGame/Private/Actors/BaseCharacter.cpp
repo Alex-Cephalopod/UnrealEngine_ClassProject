@@ -49,6 +49,7 @@ void ABaseCharacter::BeginPlay()
 	BindWeapAndAnimEvents();
 
 	HealthComponent->OnDeathHealth.AddDynamic(this, &ABaseCharacter::HandleDeath);
+	//EffectsComponent->StartEffects(EEffects::EE_Burning, this);
 }
 
 // Called every frame
@@ -134,29 +135,20 @@ void ABaseCharacter::BindWeapAndAnimEvents()
 {
 
 	if (!HealthComponent->OnDamageHealth.IsBound())
-	{
 		HealthComponent->OnDamageHealth.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayDamageWithFloat);
-	}
 
 	if (!Weapon->OnAttack.IsBound()) 
-	{
 		Weapon->OnAttack.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayAttack);
-	}
 
 	if (!AnimInstance->OnActionEnded.IsBound()) 
-	{
 		AnimInstance->OnActionEnded.AddDynamic(Weapon, &ABaseWeapon::AnimationEnded);
-	}
 
 	if (!Weapon->OnReloadAnim.IsBound())
-	{
 		Weapon->OnReloadAnim.AddDynamic(AnimInstance, &UBaseRifleAnimInstance::PlayReload);
-	}
 
 	if (!AnimInstance->OnReloadWeapon.IsBound())
-	{
 		AnimInstance->OnReloadWeapon.AddDynamic(Weapon, &ABaseWeapon::ReloadAmmo);
-	}
+	
 }
 
 bool ABaseCharacter::CanPickupHealth() const
