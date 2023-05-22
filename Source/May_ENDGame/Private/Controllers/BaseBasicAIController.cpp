@@ -15,14 +15,6 @@ ABaseBasicAIController::ABaseBasicAIController()
 	AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIPerceptionComponent"));
 }
 
-//void ABaseBasicAIController::BeginPlay()
-//{
-//	if (AIPerceptionComponent)
-//	{
-//		AIPerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &ABaseBasicAIController::OnTargetPerceptionUpdate);
-//	}
-//}
-
 void ABaseBasicAIController::OnPossess(APawn* PossessedPawn)
 {
 	Super::OnPossess(PossessedPawn);

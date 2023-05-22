@@ -49,7 +49,8 @@ void ABaseCharacter::BeginPlay()
 	BindWeapAndAnimEvents();
 
 	HealthComponent->OnDeathHealth.AddDynamic(this, &ABaseCharacter::HandleDeath);
-	//EffectsComponent->StartEffects(EEffects::EE_Burning, this);
+	
+	Weapon->ReloadAmmo();
 }
 
 // Called every frame

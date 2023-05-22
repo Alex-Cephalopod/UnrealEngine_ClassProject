@@ -40,7 +40,7 @@ void ABaseGameMode::RemoveEnemy(AActor* DestroyedActor)
 {
 	--CurrentEnemyCount;
 
-	if (CurrentEnemyCount <= 0)
+	if (CurrentEnemyCount == 0)
 	{
 		ResultsWidget->SetWin(); 
 		ResultsWidget->AddToViewport(); 
