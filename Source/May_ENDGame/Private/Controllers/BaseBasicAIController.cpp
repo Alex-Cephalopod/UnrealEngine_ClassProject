@@ -7,6 +7,7 @@
 #include "Perception/AISenseConfig_Sight.h"
 #include "Perception/AISense_Sight.h"
 #include "Perception/AIPerceptionTypes.h"
+#include "Actors/BasePlayer.h"
 
 
 
@@ -33,7 +34,11 @@ void ABaseBasicAIController::OnTargetPerceptionUpdate(AActor* Actor, FAIStimulus
 {
 	if (Stimulus.WasSuccessfullySensed())
 	{
-		Blackboard->SetValueAsObject(PlayerKey, Actor);
+		ABasePlayer* Player = Cast<ABasePlayer>(Actor);
+		if (Player)
+		{
+			Blackboard->SetValueAsObject(PlayerKey, Actor);
+		}
 	}
 	else
 	{
