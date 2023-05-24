@@ -24,5 +24,5 @@ void ABaseDamagePickup::HandlePickup(AActor* OtherActor, const FHitResult& Sweep
 
 void ABaseDamagePickup::PostPickup()
 {
-
+	//do nothing
 }

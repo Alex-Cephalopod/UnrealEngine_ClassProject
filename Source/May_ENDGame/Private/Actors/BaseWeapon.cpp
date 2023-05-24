@@ -6,7 +6,6 @@
 #include "Art/BaseRifleAnimInstance.h"
 #include "Actors/BasePlayer.h"
 #include "GameFramework/Pawn.h"
-#include "Actors/BaseCustomPawn.h"
 
 ABaseWeapon::ABaseWeapon()
 {

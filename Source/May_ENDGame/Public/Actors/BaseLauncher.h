@@ -14,9 +14,6 @@ class MAY_ENDGAME_API ABaseLauncher : public ABaseWeapon
 {
 	GENERATED_BODY()
 
-public:
-	ABaseLauncher();
-
 protected:
 	virtual void BeginPlay() override;
 

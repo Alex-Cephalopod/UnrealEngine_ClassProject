@@ -14,32 +14,24 @@ UBaseEffectsComponent::UBaseEffectsComponent()
 	// ...
 }
 
-// Called every frame
-void UBaseEffectsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	//Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-
 void UBaseEffectsComponent::StartEffects(EEffects EffectType, AActor* DamageCauser)
 {
 	switch (EffectType)
 	{
-	case EEffects::EE_Burning:
-	{
-		FActorSpawnParameters SpawnParams; 
-		SpawnParams.Owner = DamageCauser;
-		ABaseFireEffect* FireEffect = GetWorld()->SpawnActor<ABaseFireEffect>(FireEffectClass, GetComponentTransform(), SpawnParams);
+		case EEffects::EE_Burning:
+		{
+			FActorSpawnParameters SpawnParams; 
+			SpawnParams.Owner = DamageCauser;
+			ABaseFireEffect* FireEffect = GetWorld()->SpawnActor<ABaseFireEffect>(FireEffectClass, GetComponentTransform(), SpawnParams);
 
-		FireEffect->AttachToActor(GetOwner(), FAttachmentTransformRules::KeepWorldTransform);
-		break;
-	}
-	case EEffects::EE_NumEffects:
-	{
-		UE_LOG(LogTemp, Error, TEXT("Bad Effect Type"));
-		break;
-	}
+			FireEffect->AttachToActor(GetOwner(), FAttachmentTransformRules::KeepWorldTransform);
+			break;
+		}
+		case EEffects::EE_NumEffects:
+		{
+			UE_LOG(LogTemp, Error, TEXT("Bad Effect Type"));
+			break;
+		}
 	}
 }
 

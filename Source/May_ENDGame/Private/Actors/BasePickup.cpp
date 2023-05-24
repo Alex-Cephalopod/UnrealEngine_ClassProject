@@ -57,7 +57,7 @@ void ABasePickup::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
 
 void ABasePickup::HandlePickup(AActor* OtherActor, const FHitResult& SweepResult)
 {
-
+	//do nothing
 }
 
 void ABasePickup::PostPickup()
@@ -67,6 +67,6 @@ void ABasePickup::PostPickup()
 
 void ABasePickup::HandleNoPickup()
 {
-
+	//do nothing
 }
 

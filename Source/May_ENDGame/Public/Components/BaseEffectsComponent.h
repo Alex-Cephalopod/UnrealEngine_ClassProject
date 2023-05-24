@@ -28,8 +28,6 @@ protected:
 		TSubclassOf<class ABaseFireEffect> FireEffectClass;
 
 public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION()
 		void StartEffects(EEffects EffectType, AActor* DamageCauser);

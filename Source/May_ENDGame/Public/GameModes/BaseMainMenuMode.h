@@ -14,8 +14,4 @@ class MAY_ENDGAME_API ABaseMainMenuMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-public:
-
-protected:
-
 };

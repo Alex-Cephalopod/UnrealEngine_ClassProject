@@ -19,7 +19,6 @@ public:
 
 	ABaseAI();
 
-	//create a blackboard object reference
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UBlackboardComponent* Blackboard;
 

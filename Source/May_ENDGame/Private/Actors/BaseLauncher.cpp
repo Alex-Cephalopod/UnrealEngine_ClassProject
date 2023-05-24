@@ -4,11 +4,6 @@
 #include "Actors/BaseLauncher.h"
 #include "Actors/BaseStickyBomb.h"
 
-ABaseLauncher::ABaseLauncher()
-{
-
-}
-
 void ABaseLauncher::BeginPlay()
 {
 	Super::BeginPlay();

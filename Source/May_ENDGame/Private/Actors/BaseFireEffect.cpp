@@ -15,7 +15,6 @@ ABaseFireEffect::ABaseFireEffect()
 
 	FireEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("FireEffect"));
 	SetRootComponent(FireEffect);
-
 }
 
 // Called every frame
@@ -26,6 +25,5 @@ void ABaseFireEffect::Tick(float DeltaTime)
 	float DPS = FireDamage * DeltaTime;
 
 	UGameplayStatics::ApplyDamage(GetAttachParentActor(), DPS, nullptr, GetOwner(), nullptr);
-
 }
 
