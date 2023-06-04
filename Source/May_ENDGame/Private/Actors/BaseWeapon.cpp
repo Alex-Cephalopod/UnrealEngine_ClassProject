@@ -20,7 +20,6 @@ ABaseWeapon::ABaseWeapon()
 void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
-	BulletClass = ABaseBullet::StaticClass(); 
 	PawnOwner = Cast<APawn>(GetParentActor()); 
 	ReloadAmmo();
 }
@@ -31,7 +30,7 @@ ABaseBullet* ABaseWeapon::Attacks()
 	if (CanShoot())
 	{
 		FActorSpawnParameters SpawnParams; 
-		SpawnParams.Instigator = PawnOwner; 
+		SpawnParams.Instigator = PawnOwner;
 
 		Bullet = GetWorld()->SpawnActor<ABaseBullet>(BulletClass, WeaponMesh->GetSocketLocation("MuzzleFlashSocket"), PawnOwner->GetBaseAimRotation(), SpawnParams);
 

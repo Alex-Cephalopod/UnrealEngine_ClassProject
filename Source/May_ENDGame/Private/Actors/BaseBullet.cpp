@@ -30,11 +30,11 @@ ABaseBullet::ABaseBullet()
 
 #pragma region SphereMesh_And_Material
 	SphereMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SphereMesh"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
+	/*static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
 	if (SphereMeshAsset.Succeeded())
 	{
 		SphereMesh->SetStaticMesh(SphereMeshAsset.Object);
-	}
+	}*/
 
 	SphereMesh->SetRelativeScale3D(MeshSize);
 	SphereMesh->SetGenerateOverlapEvents(false);
@@ -42,11 +42,11 @@ ABaseBullet::ABaseBullet()
 	SphereMesh->CanCharacterStepUpOn = ECanBeCharacterBase::ECB_No;
 	SphereMesh->SetupAttachment(SphereCollision);
 
-	static ConstructorHelpers::FObjectFinder<UMaterialInterface> Material(TEXT("Material'/Game/Art/M_FlatColor.M_FlatColor'"));
+	/*static ConstructorHelpers::FObjectFinder<UMaterialInterface> Material(TEXT("Material'/Game/Art/M_FlatColor.M_FlatColor'"));
 	if (Material.Succeeded())
 	{
 		SphereMesh->SetMaterial(0, Material.Object);
-	}
+	}*/
 #pragma endregion
 
 #pragma region ProjectileMovement
